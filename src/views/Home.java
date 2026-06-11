@@ -83,7 +83,7 @@ public class Home extends JFrame {
         	public void mouseClicked(MouseEvent e) {
         		Login login = new Login();
         		login.setVisible(true);
-        		setVisible(false);
+        		dispose();
         	}
         });
         loginButton.setFont(buttonFont);

@@ -6,8 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import errors.UserNotFoundException;
-import model.BankAccount;
-import model.BankEmployee;
 import model.DB;
 import model.User;
 

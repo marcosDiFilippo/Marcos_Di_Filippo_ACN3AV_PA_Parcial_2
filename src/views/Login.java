@@ -99,7 +99,7 @@ public class Login extends JFrame {
         backButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                setVisible(false);
+                dispose();
                 Home home = new Home();
                 home.setVisible(true);
             }
@@ -211,13 +211,13 @@ public class Login extends JFrame {
     public String getPassword() { return new String(passwordField.getPassword()); }
     
     private void login() {
-        AuthController authController = new AuthController(this);
+        AuthController authController = new AuthController();
         LoginDTO loginDTO = new LoginDTO(getEmail(), getPassword());
 
         try {
             authController.login(loginDTO);
             JOptionPane.showMessageDialog(this, "¡Bienvenido al Sistema Bancario!", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-            setVisible(false);
+            dispose();
         } 
         catch (ValidationException e) {
             JOptionPane.showMessageDialog(this, e.getMessage(), "Error de Validación", JOptionPane.ERROR_MESSAGE);

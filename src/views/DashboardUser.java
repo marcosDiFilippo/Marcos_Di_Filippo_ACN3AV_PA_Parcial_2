@@ -3,7 +3,6 @@ package views;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import constants.Colors;
-import model.BankAccount;
 
 import java.awt.Cursor;
 import java.awt.Dimension;
