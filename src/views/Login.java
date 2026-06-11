@@ -16,6 +16,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -23,6 +24,8 @@ import javax.swing.SwingConstants;
 
 import controllers.AuthController;
 import dto.Auth.LoginDTO;
+import errors.InvalidCredentialsException;
+import errors.ValidationException;
 
 public class Login extends JFrame {
 
@@ -209,10 +212,22 @@ public class Login extends JFrame {
     
     private void login() {
         AuthController authController = new AuthController();
-
         LoginDTO loginDTO = new LoginDTO(getEmail(), getPassword());
 
-        authController.login(loginDTO);
+        try {
+            authController.login(loginDTO);
+            JOptionPane.showMessageDialog(this, "¡Bienvenido al Sistema Bancario!", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            setVisible(false);
+        } 
+        catch (ValidationException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error de Validación", JOptionPane.ERROR_MESSAGE);
+        }
+        catch (InvalidCredentialsException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error de Autenticación", JOptionPane.ERROR_MESSAGE);
+        }
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error de Autenticación", JOptionPane.ERROR_MESSAGE);
+        }
     } 
 
 	public static void main(String[] args) {

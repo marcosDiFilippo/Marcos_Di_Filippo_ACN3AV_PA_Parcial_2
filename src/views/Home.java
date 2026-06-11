@@ -3,7 +3,6 @@ package views;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import constants.*;
-import model.DB;
 
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -22,7 +21,6 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.sql.Connection;
 
 public class Home extends JFrame {
 
@@ -55,9 +53,6 @@ public class Home extends JFrame {
     private JLabel footerLabel;
     
     public Home() {
-
-        Connection connection = DB.getConnection();
-
     	setTitle("Sistema Bancario - Inicio");
         setSize(1000, 800);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

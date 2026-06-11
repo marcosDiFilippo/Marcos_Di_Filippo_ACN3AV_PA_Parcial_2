@@ -25,6 +25,8 @@ CREATE TABLE bank_accounts (
     id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     user_id BIGINT UNSIGNED NOT NULL,
     balance DECIMAL(15,2) NOT NULL DEFAULT 0,
+    account_number INT NOT NULL UNIQUE,
+    alias VARCHAR(255) NOT NULL UNIQUE,
 
     CONSTRAINT fk_bank_accounts_user
         FOREIGN KEY (user_id)
@@ -160,16 +162,16 @@ VALUES
 -- 1. Dos registros en la tabla users (un cliente normal y un empleado)
 INSERT INTO users (first_name, last_name, birth_date, identification_document, email, password)
 VALUES 
-('Juan', 'Perez', '1990-05-15', '12345678', 'cliente@banco.com', '123456'),
-('Ana', 'Gomez', '1985-10-20', '87654321', 'empleado@banco.com', 'admin123');
+('Juan', 'Perez', '1990-05-15', '12345678', 'cliente@banco.com', SHA2('123456', 256)),
+('Ana', 'Gomez', '1985-10-20', '87654321', 'empleado@banco.com', SHA2('admin123', 256));
 
 -- 2. Un registro en bank_employees vinculado al usuario empleado (id 2)
 INSERT INTO bank_employees (user_id)
 VALUES (2);
 
 -- 3. Un registro en bank_accounts vinculado al usuario cliente (id 1), con saldo 50000.00
-INSERT INTO bank_accounts (user_id, balance)
-VALUES (1, 50000.00);
+INSERT INTO bank_accounts (user_id, balance, account_number, alias)
+VALUES (1, 50000.00, 123456789, 'JuanPerez1');
 
 -- 4. Un registro en bank_tellers simulando un cajero automático con 100000.00
 INSERT INTO bank_tellers (location, available_cash)
