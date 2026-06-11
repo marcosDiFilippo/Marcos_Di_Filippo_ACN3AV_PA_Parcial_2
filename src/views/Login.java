@@ -60,7 +60,7 @@ public class Login extends JFrame {
     private JButton submitButton;
 
     public Login() {
-    	setTitle("Sistema Bancario - Iniciar Sesión");
+        setTitle("Sistema Bancario - Iniciar Sesión");
         setSize(1000, 800);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null); 
@@ -96,14 +96,14 @@ public class Login extends JFrame {
         backButton.setBorder(BorderFactory.createEmptyBorder(8, 20, 8, 20));
         backButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
-		backButton.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				setVisible(false);
-				Home home = new Home();
-				home.setVisible(true);
-			}
-		});
+        backButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                setVisible(false);
+                Home home = new Home();
+                home.setVisible(true);
+            }
+        });
 
         formTitleLabel = new JLabel("Iniciar Sesión");
         formTitleLabel.setFont(titleFont);
@@ -136,41 +136,41 @@ public class Login extends JFrame {
 
         submitButton = new JButton("Ingresar");
         submitButton.setFont(buttonFont);
-        submitButton.setBackground(actionAccent); // Usamos el Azul Eléctrico
+        submitButton.setBackground(actionAccent);
         submitButton.setForeground(whiteColor);
         submitButton.setFocusPainted(false);
         submitButton.setBorder(BorderFactory.createEmptyBorder(12, 20, 12, 20));
         submitButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
-		submitButton.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				login();
-			}
-		});
-		
-		headerPanel.add(logoLabel, BorderLayout.WEST);
+        submitButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                login();
+            }
+        });
+        
+        headerPanel.add(logoLabel, BorderLayout.WEST);
         headerPanel.add(backButton, BorderLayout.EAST);
 
         GridBagConstraints formGbc1 = new GridBagConstraints();
         formGbc1.gridx = 0;
         formGbc1.gridy = 0;
-        formGbc1.fill = GridBagConstraints.HORIZONTAL; // Que los componentes se estiren a lo ancho
-        formGbc1.insets = new Insets(0, 0, 30, 0); // Separación debajo del título
+        formGbc1.fill = GridBagConstraints.HORIZONTAL;
+        formGbc1.insets = new Insets(0, 0, 30, 0);
         formPanel.add(formTitleLabel, formGbc1);
 
         GridBagConstraints formGbc2 = new GridBagConstraints();
         formGbc2.gridx = 0;
         formGbc2.gridy = 1;
         formGbc2.fill = GridBagConstraints.HORIZONTAL;
-        formGbc2.insets = new Insets(0, 0, 5, 0); // Separación debajo del label
+        formGbc2.insets = new Insets(0, 0, 5, 0);
         formPanel.add(emailLabel, formGbc2);
 
         GridBagConstraints formGbc3 = new GridBagConstraints();
         formGbc3.gridx = 0;
         formGbc3.gridy = 2;
         formGbc3.fill = GridBagConstraints.HORIZONTAL;
-        formGbc3.insets = new Insets(0, 0, 20, 0); // Separación debajo del input
+        formGbc3.insets = new Insets(0, 0, 20, 0);
         formPanel.add(emailField, formGbc3);
 
         GridBagConstraints formGbc4 = new GridBagConstraints();
@@ -211,7 +211,7 @@ public class Login extends JFrame {
     public String getPassword() { return new String(passwordField.getPassword()); }
     
     private void login() {
-        AuthController authController = new AuthController();
+        AuthController authController = new AuthController(this);
         LoginDTO loginDTO = new LoginDTO(getEmail(), getPassword());
 
         try {
@@ -230,7 +230,7 @@ public class Login extends JFrame {
         }
     } 
 
-	public static void main(String[] args) {
+    public static void main(String[] args) {
         EventQueue.invokeLater(() -> {
             try {
                 Login frame = new Login();
