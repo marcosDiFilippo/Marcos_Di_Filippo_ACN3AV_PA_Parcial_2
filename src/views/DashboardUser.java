@@ -3,6 +3,8 @@ package views;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import constants.Colors;
+import controllers.AuthController;
+import controllers.UserOperationController;
 
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -11,6 +13,8 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -57,17 +61,26 @@ public class DashboardUser extends JFrame {
         headerPanel.setBackground(primaryColor);
         headerPanel.setBorder(BorderFactory.createEmptyBorder(15, 30, 15, 30));
 
-        welcomeLabel = new JLabel("Bienvenido, Cliente");
+        String userName = session.UserSession.getCurrentUser() != null ? session.UserSession.getCurrentUser().getFirstName() + " " + session.UserSession.getCurrentUser().getLastName() : "Cliente";
+        welcomeLabel = new JLabel("Bienvenido, " + userName);
         welcomeLabel.setFont(titleFont);
         welcomeLabel.setForeground(whiteColor);
 
         btnLogout = new JButton("Cerrar Sesión");
         btnLogout.setFont(new Font("Segoe UI", Font.BOLD, 14));
-        btnLogout.setBackground(secondaryGray);
+        btnLogout.setBackground(primaryColor);
         btnLogout.setForeground(whiteColor);
         btnLogout.setFocusPainted(false);
         btnLogout.setBorder(BorderFactory.createEmptyBorder(8, 20, 8, 20));
         btnLogout.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
+        btnLogout.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                AuthController authController = new AuthController();
+                authController.logout(DashboardUser.this);
+            }
+        });
 
         headerPanel.add(welcomeLabel, BorderLayout.WEST);
         headerPanel.add(btnLogout, BorderLayout.EAST);
@@ -92,6 +105,15 @@ public class DashboardUser extends JFrame {
         btnDepositarRetirar.setBorder(BorderFactory.createEmptyBorder(15, 20, 15, 20));
         btnDepositarRetirar.setCursor(new Cursor(Cursor.HAND_CURSOR));
         btnDepositarRetirar.setPreferredSize(new Dimension(350, 60));
+
+        btnDepositarRetirar.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                UserOperationController userOperationController = new UserOperationController();
+
+                userOperationController.openTellerSelection(DashboardUser.this);
+            }
+        });
 
         btnTransferir = new JButton("Transferir a Otra Cuenta");
         btnTransferir.setFont(buttonFont);

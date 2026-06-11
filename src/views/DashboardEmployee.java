@@ -3,7 +3,9 @@ package views;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import constants.Colors;
+import controllers.AuthController;
 import controllers.EmployeeController;
+import session.UserSession;
 
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -58,17 +60,26 @@ public class DashboardEmployee extends JFrame {
         headerPanel.setBackground(primaryColor);
         headerPanel.setBorder(BorderFactory.createEmptyBorder(15, 30, 15, 30));
 
-        welcomeLabel = new JLabel("Panel de Administración - Bienvenido");
+        String employeeName = session.UserSession.getCurrentUser() != null ? session.UserSession.getCurrentUser().getFirstName() + " " + session.UserSession.getCurrentUser().getLastName() : "Empleado";
+        welcomeLabel = new JLabel("Panel de Administración - Bienvenido, " + employeeName);
         welcomeLabel.setFont(titleFont);
         welcomeLabel.setForeground(whiteColor);
 
         btnLogout = new JButton("Cerrar Sesión");
         btnLogout.setFont(new Font("Segoe UI", Font.BOLD, 14));
-        btnLogout.setBackground(secondaryGray);
+        btnLogout.setBackground(primaryColor);
         btnLogout.setForeground(whiteColor);
         btnLogout.setFocusPainted(false);
         btnLogout.setBorder(BorderFactory.createEmptyBorder(8, 20, 8, 20));
         btnLogout.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
+        btnLogout.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+               AuthController authController = new AuthController();
+               authController.logout(DashboardEmployee.this);
+            }
+        });
 
         headerPanel.add(welcomeLabel, BorderLayout.WEST);
         headerPanel.add(btnLogout, BorderLayout.EAST);

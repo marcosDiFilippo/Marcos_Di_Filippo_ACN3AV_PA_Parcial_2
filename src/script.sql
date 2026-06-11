@@ -159,20 +159,56 @@ VALUES
 -- SEED DATA (DATOS DE PRUEBA)
 -- ==========================================
 
--- 1. Dos registros en la tabla users (un cliente normal y un empleado)
+-- 1. Registros en la tabla users (10 clientes y 5 empleados)
 INSERT INTO users (first_name, last_name, birth_date, identification_document, email, password)
 VALUES 
-('Juan', 'Perez', '1990-05-15', '12345678', 'cliente@banco.com', SHA2('123456', 256)),
-('Ana', 'Gomez', '1985-10-20', '87654321', 'empleado@banco.com', SHA2('admin123', 256));
+-- Clientes (IDs 1 al 10)
+('Juan', 'Perez', '1990-05-15', '12345678', 'cliente1@banco.com', SHA2('123456', 256)),
+('Maria', 'Lopez', '1992-08-22', '23456789', 'cliente2@banco.com', SHA2('123456', 256)),
+('Carlos', 'Martinez', '1988-12-10', '34567890', 'cliente3@banco.com', SHA2('123456', 256)),
+('Laura', 'Garcia', '1995-03-05', '45678901', 'cliente4@banco.com', SHA2('123456', 256)),
+('Diego', 'Fernandez', '1980-11-30', '56789012', 'cliente5@banco.com', SHA2('123456', 256)),
+('Sofia', 'Rodriguez', '1998-07-18', '67890123', 'cliente6@banco.com', SHA2('123456', 256)),
+('Martin', 'Sanchez', '1985-09-25', '78901234', 'cliente7@banco.com', SHA2('123456', 256)),
+('Lucia', 'Romero', '1993-01-14', '89012345', 'cliente8@banco.com', SHA2('123456', 256)),
+('Pedro', 'Diaz', '1979-06-08', '90123456', 'cliente9@banco.com', SHA2('123456', 256)),
+('Valentina', 'Ruiz', '2000-04-12', '01234567', 'cliente10@banco.com', SHA2('123456', 256)),
+-- Empleados (IDs 11 al 15)
+('Ana', 'Gomez', '1985-10-20', '87654321', 'empleado1@banco.com', SHA2('admin123', 256)),
+('Roberto', 'Silva', '1975-02-28', '76543210', 'empleado2@banco.com', SHA2('admin123', 256)),
+('Elena', 'Torres', '1989-12-05', '65432109', 'empleado3@banco.com', SHA2('admin123', 256)),
+('Javier', 'Ramirez', '1991-05-16', '54321098', 'empleado4@banco.com', SHA2('admin123', 256)),
+('Carmen', 'Castro', '1982-08-09', '43210987', 'empleado5@banco.com', SHA2('admin123', 256));
 
--- 2. Un registro en bank_employees vinculado al usuario empleado (id 2)
+-- 2. Registros en bank_employees vinculados a los usuarios empleados (IDs 11 al 15)
 INSERT INTO bank_employees (user_id)
-VALUES (2);
+VALUES 
+(11), (12), (13), (14), (15);
 
--- 3. Un registro en bank_accounts vinculado al usuario cliente (id 1), con saldo 50000.00
+-- 3. Registros en bank_accounts vinculados a los clientes (IDs 1 al 10)
 INSERT INTO bank_accounts (user_id, balance, account_number, alias)
-VALUES (1, 50000.00, 123456789, 'JuanPerez1');
+VALUES 
+(1, 50000.00, 100000001, 'juan.perez.banco'),
+(2, 75000.50, 100000002, 'maria.lopez.banco'),
+(3, 12000.00, 100000003, 'carlos.martinez.banco'),
+(4, 250000.75, 100000004, 'laura.garcia.banco'),
+(5, 8000.20, 100000005, 'diego.fernandez.banco'),
+(6, 43000.00, 100000006, 'sofia.rodriguez.banco'),
+(7, 10500.00, 100000007, 'martin.sanchez.banco'),
+(8, 62000.90, 100000008, 'lucia.romero.banco'),
+(9, 31000.00, 100000009, 'pedro.diaz.banco'),
+(10, 95000.00, 100000010, 'valentina.ruiz.banco');
 
--- 4. Un registro en bank_tellers simulando un cajero automático con 100000.00
+-- 4. Registros en bank_tellers simulando cajeros automáticos en diferentes sucursales
 INSERT INTO bank_tellers (location, available_cash)
-VALUES ('Sucursal Central - Cajero 01', 100000.00);
+VALUES 
+('Sucursal Central - Cajero 01', 150000.00),
+('Sucursal Central - Cajero 02', 120000.00),
+('Sucursal Norte - Cajero 01', 80000.00),
+('Sucursal Norte - Cajero 02', 65000.00),
+('Sucursal Sur - Cajero 01', 45000.00),
+('Sucursal Este - Cajero 01', 95000.00),
+('Sucursal Oeste - Cajero 01', 30000.00),
+('Shopping Las Palmas - Cajero 01', 200000.00),
+('Shopping Las Palmas - Cajero 02', 180000.00),
+('Aeropuerto Internacional - Cajero 01', 300000.00);
