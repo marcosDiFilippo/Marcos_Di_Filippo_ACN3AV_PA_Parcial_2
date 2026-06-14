@@ -1,6 +1,6 @@
 package controllers;
 
-import dto.BankTellerDTO;
+import model.BankTeller;
 import services.TellerService;
 import views.ReplenishTellerSelectionView;
 import views.ReplenishAmountView;
@@ -22,11 +22,7 @@ public class ReplenishController {
     public void startReplenishFlow(JFrame parentView) {
         try {
             List<BankTeller> tellers = tellerService.getAllTellers();
-            List<BankTellerDTO> dtos = new ArrayList<>();
-            for (BankTeller t : tellers) {
-                dtos.add(new BankTellerDTO(t.getId(), t.getLocation(), t.getAvailableCash()));
-            }
-            ReplenishTellerSelectionView view = new ReplenishTellerSelectionView(parentView, dtos);
+            ReplenishTellerSelectionView view = new ReplenishTellerSelectionView(parentView, tellers);
             view.setVisible(true);
             parentView.dispose();
         } catch (Exception e) {
@@ -34,12 +30,12 @@ public class ReplenishController {
         }
     }
 
-    public void processTellerSelection(BankTellerDTO selected, JFrame parentView) {
+    public void processTellerSelection(BankTeller selected, JFrame parentView) {
         ReplenishAmountView view = new ReplenishAmountView(parentView, selected);
         view.setVisible(true);
     }
 
-    public void processReplenish(BankTellerDTO teller, double amount, JFrame currentView, JFrame dashboardView) {
+    public void processReplenish(BankTeller teller, double amount, JFrame currentView, JFrame dashboardView) {
         try {
             tellerService.replenishCash(teller, amount);
             JOptionPane.showMessageDialog(currentView, "Dinero repuesto exitosamente.");

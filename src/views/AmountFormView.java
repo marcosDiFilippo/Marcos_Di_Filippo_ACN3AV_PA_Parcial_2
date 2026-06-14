@@ -19,7 +19,7 @@ import javax.swing.JTextField;
 import constants.Colors;
 import constants.TransactionType;
 import controllers.DepositWithdrawController;
-import dto.BankTellerDTO;
+import model.BankTeller;
 
 public class AmountFormView extends JFrame {
 
@@ -41,7 +41,7 @@ public class AmountFormView extends JFrame {
     private JButton btnConfirm;
     private JButton btnBack;
 
-    public AmountFormView(JFrame parentView, BankTellerDTO teller, TransactionType operationType) {
+    public AmountFormView(JFrame parentView, BankTeller teller, TransactionType operationType) {
         setTitle(operationType == TransactionType.DEPOSITO ? "Depositar Dinero" : "Retirar Dinero");
         setSize(500, 400);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

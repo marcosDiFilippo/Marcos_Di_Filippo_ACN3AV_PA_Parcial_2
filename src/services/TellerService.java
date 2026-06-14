@@ -8,7 +8,6 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import dao.BankTellerDAO;
 import dao.TransactionDAO;
-import dto.BankTellerDTO;
 import model.BankTeller;
 import model.DB;
 import session.UserSession;
@@ -25,7 +24,7 @@ public class TellerService {
         return bankTellerDAO.findAll();
     }
 
-    public void replenishCash(BankTellerDTO teller, double amount) throws Exception {
+    public void replenishCash(BankTeller teller, double amount) throws Exception {
         if (amount <= 0) {
             throw new Exception("El monto a reponer debe ser mayor a cero.");
         }

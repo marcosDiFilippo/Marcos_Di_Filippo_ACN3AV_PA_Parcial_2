@@ -18,7 +18,7 @@ import javax.swing.JTextField;
 
 import constants.Colors;
 import controllers.ReplenishController;
-import dto.BankTellerDTO;
+import model.BankTeller;
 
 public class ReplenishAmountView extends JFrame {
 
@@ -40,7 +40,7 @@ public class ReplenishAmountView extends JFrame {
     private JButton btnConfirm;
     private JButton btnBack;
 
-    public ReplenishAmountView(JFrame parentView, BankTellerDTO teller) {
+    public ReplenishAmountView(JFrame parentView, BankTeller teller) {
         setTitle("Reponer Dinero en Cajero");
         setSize(500, 500);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

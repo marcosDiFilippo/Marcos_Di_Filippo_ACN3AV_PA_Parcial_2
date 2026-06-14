@@ -20,7 +20,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import constants.Colors;
 import controllers.ReplenishController;
-import dto.BankTellerDTO;
+import model.BankTeller;
 
 public class ReplenishTellerSelectionView extends JFrame {
 
@@ -43,7 +43,7 @@ public class ReplenishTellerSelectionView extends JFrame {
     private JLabel titleLabel;
     private JButton btnBack;
 
-    public ReplenishTellerSelectionView(JFrame parentView, List<BankTellerDTO> tellers) {
+    public ReplenishTellerSelectionView(JFrame parentView, List<BankTeller> tellers) {
         setTitle("Seleccionar Cajero para Reponer Dinero");
         setSize(1000, 800);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -71,7 +71,7 @@ public class ReplenishTellerSelectionView extends JFrame {
         gbc.insets = new Insets(10, 20, 10, 20);
 
         for (int i = 0; i < tellers.size(); i++) {
-            BankTellerDTO tellerActual = tellers.get(i);
+            BankTeller tellerActual = tellers.get(i);
             JButton btnTeller = new JButton(tellerActual.toString());
             btnTeller.setFont(buttonFont);
             btnTeller.setBackground(actionAccent);

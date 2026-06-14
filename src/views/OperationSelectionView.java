@@ -16,7 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import constants.Colors;
 import constants.TransactionType;
-import dto.BankTellerDTO;
+import model.BankTeller;
 
 public class OperationSelectionView extends JFrame {
 
@@ -37,7 +37,7 @@ public class OperationSelectionView extends JFrame {
     private JButton btnWithdraw;
     private JButton btnBack;
 
-    public OperationSelectionView(JFrame parentView, BankTellerDTO teller) {
+    public OperationSelectionView(JFrame parentView, BankTeller teller) {
         setTitle("Seleccionar Operación");
         setSize(600, 500);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
