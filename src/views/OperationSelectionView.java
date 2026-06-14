@@ -15,6 +15,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import constants.Colors;
+import dto.BankTellerDTO;
 
 public class OperationSelectionView extends JFrame {
 
@@ -35,7 +36,7 @@ public class OperationSelectionView extends JFrame {
     private JButton btnWithdraw;
     private JButton btnBack;
 
-    public OperationSelectionView(JFrame parentView) {
+    public OperationSelectionView(JFrame parentView, BankTellerDTO teller) {
         setTitle("Seleccionar Operación");
         setSize(600, 500);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -61,7 +62,9 @@ public class OperationSelectionView extends JFrame {
         btnDeposit.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-
+                AmountFormView form = new AmountFormView(parentView, teller, "DEPOSIT");
+                form.setVisible(true);
+                dispose();
             }
         });
 
@@ -77,7 +80,9 @@ public class OperationSelectionView extends JFrame {
         btnWithdraw.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-
+                AmountFormView form = new AmountFormView(parentView, teller, "WITHDRAW");
+                form.setVisible(true);
+                dispose();
             }
         });
 

@@ -61,7 +61,7 @@ public class DashboardUser extends JFrame {
         headerPanel.setBackground(primaryColor);
         headerPanel.setBorder(BorderFactory.createEmptyBorder(15, 30, 15, 30));
 
-        String userName = session.UserSession.getCurrentUser() != null ? session.UserSession.getCurrentUser().getFirstName() + " " + session.UserSession.getCurrentUser().getLastName() : "Cliente";
+        String userName = session.UserSession.getInstance() != null ? session.UserSession.getInstance().getFirstName() + " " + session.UserSession.getInstance().getLastName() : "Cliente";
         welcomeLabel = new JLabel("Bienvenido, " + userName);
         welcomeLabel.setFont(titleFont);
         welcomeLabel.setForeground(whiteColor);
@@ -97,6 +97,14 @@ public class DashboardUser extends JFrame {
         btnConsultar.setCursor(new Cursor(Cursor.HAND_CURSOR));
         btnConsultar.setPreferredSize(new Dimension(350, 60));
 
+        btnConsultar.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                controllers.BalanceController balanceController = new controllers.BalanceController();
+                balanceController.openBalanceView(DashboardUser.this);
+            }
+        });
+
         btnDepositarRetirar = new JButton("Depositar / Retirar Dinero");
         btnDepositarRetirar.setFont(buttonFont);
         btnDepositarRetirar.setBackground(actionAccent);
@@ -123,6 +131,14 @@ public class DashboardUser extends JFrame {
         btnTransferir.setBorder(BorderFactory.createEmptyBorder(15, 20, 15, 20));
         btnTransferir.setCursor(new Cursor(Cursor.HAND_CURSOR));
         btnTransferir.setPreferredSize(new Dimension(350, 60));
+
+        btnTransferir.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                controllers.TransferController transferController = new controllers.TransferController();
+                transferController.openTransferView(DashboardUser.this);
+            }
+        });
 
         btnTestear = new JButton("Testear Funciones del Cajero");
         btnTestear.setFont(buttonFont);

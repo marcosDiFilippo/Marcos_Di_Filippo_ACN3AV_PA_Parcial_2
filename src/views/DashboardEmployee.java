@@ -60,7 +60,7 @@ public class DashboardEmployee extends JFrame {
         headerPanel.setBackground(primaryColor);
         headerPanel.setBorder(BorderFactory.createEmptyBorder(15, 30, 15, 30));
 
-        String employeeName = session.UserSession.getCurrentUser() != null ? session.UserSession.getCurrentUser().getFirstName() + " " + session.UserSession.getCurrentUser().getLastName() : "Empleado";
+        String employeeName = session.UserSession.getInstance() != null ? session.UserSession.getInstance().getFirstName() + " " + session.UserSession.getInstance().getLastName() : "Empleado";
         welcomeLabel = new JLabel("Panel de Administración - Bienvenido, " + employeeName);
         welcomeLabel.setFont(titleFont);
         welcomeLabel.setForeground(whiteColor);

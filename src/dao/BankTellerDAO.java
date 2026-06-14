@@ -32,4 +32,11 @@ public class BankTellerDAO {
         }
         return tellers;
     }
+
+    public void updateAvailableCash(Connection conn, long tellerId, double newCash) throws SQLException {
+        PreparedStatement stmt = conn.prepareStatement("UPDATE bank_tellers SET available_cash = ? WHERE id = ?");
+        stmt.setDouble(1, newCash);
+        stmt.setLong(2, tellerId);
+        stmt.executeUpdate();
+    }
 }

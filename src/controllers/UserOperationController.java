@@ -1,31 +1,37 @@
 package controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFrame;
-import dao.BankTellerDAO;
+import dto.BankTellerDTO;
 import model.BankTeller;
 import views.OperationSelectionView;
 import views.TellerSelectionView;
+import services.TellerService;
 
 public class UserOperationController {
 
-    private BankTellerDAO bankTellerDAO;
-    private BankTeller selectedTeller;
+    private TellerService tellerService;
+    private BankTellerDTO selectedTeller;
 
     public UserOperationController() {
-        this.bankTellerDAO = new BankTellerDAO();
+        this.tellerService = new TellerService();
     }
 
     public void openTellerSelection(JFrame parentView) {
-        List<BankTeller> tellers = bankTellerDAO.findAll();
-        TellerSelectionView view = new TellerSelectionView(parentView, tellers);
+        List<BankTeller> tellers = tellerService.getAllTellers();
+        List<BankTellerDTO> dtos = new ArrayList<>();
+        for (BankTeller t : tellers) {
+            dtos.add(new BankTellerDTO(t.getId(), t.getLocation(), t.getAvailableCash()));
+        }
+        TellerSelectionView view = new TellerSelectionView(parentView, dtos);
         view.setVisible(true);
         parentView.dispose();
     }
 
-    public void processTellerSelection(BankTeller selected, JFrame parentView) {
+    public void processTellerSelection(BankTellerDTO selected, JFrame parentView) {
         this.selectedTeller = selected;
-        OperationSelectionView operationSelectionView = new OperationSelectionView(parentView);
+        OperationSelectionView operationSelectionView = new OperationSelectionView(parentView, selected);
         operationSelectionView.setVisible(true);
     }
 }

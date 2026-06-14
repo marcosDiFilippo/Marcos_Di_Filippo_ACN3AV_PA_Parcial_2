@@ -148,12 +148,12 @@ CREATE TABLE bank_transfers (
 
 INSERT INTO bank_transaction_types (name)
 VALUES
-('DEPOSIT'),
-('WITHDRAW'),
-('TRANSFER'),
-('BALANCE_INQUIRY'),
-('CASH_REPLENISHMENT'),
-('TEST_OPERATION');
+('Deposito'),
+('Retiro'),
+('Transferencia'),
+('Consulta Saldo'),
+('Reposicion Cajero'),
+('Operacion Prueba');
 
 -- ==========================================
 -- SEED DATA (DATOS DE PRUEBA)

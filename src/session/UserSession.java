@@ -12,6 +12,10 @@ public class UserSession {
     public static User getCurrentUser() {
         return currentUser;
     }
+
+    public static User getInstance() {
+        return currentUser;
+    }
     
     public static void closeSession() {
         currentUser = null;

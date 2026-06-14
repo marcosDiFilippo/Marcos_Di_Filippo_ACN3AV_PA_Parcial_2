@@ -20,7 +20,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import constants.Colors;
 import controllers.UserOperationController;
-import model.BankTeller;
+import dto.BankTellerDTO;
 
 public class TellerSelectionView extends JFrame {
 
@@ -43,7 +43,7 @@ public class TellerSelectionView extends JFrame {
     private JLabel titleLabel;
     private JButton btnBack;
 
-    public TellerSelectionView(JFrame parentView, List<BankTeller> tellers) {
+    public TellerSelectionView(JFrame parentView, List<BankTellerDTO> tellers) {
         setTitle("Seleccionar Cajero");
         setSize(1000, 800);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -71,7 +71,7 @@ public class TellerSelectionView extends JFrame {
         gbc.insets = new Insets(10, 20, 10, 20);
 
         for (int i = 0; i < tellers.size(); i++) {
-            BankTeller tellerActual = tellers.get(i);
+            BankTellerDTO tellerActual = tellers.get(i);
             JButton btnTeller = new JButton(tellerActual.toString());
             btnTeller.setFont(buttonFont);
             btnTeller.setBackground(actionAccent);
