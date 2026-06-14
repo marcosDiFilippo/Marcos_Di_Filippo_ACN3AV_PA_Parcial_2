@@ -13,16 +13,27 @@ public class BankTeller {
         this.availableCash = availableCash;
     }
 
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    public Long getId() { 
+        return id; 
+    }
+    public void setId(Long id) { 
+        this.id = id; 
+    }
 
-    public String getLocation() { return location; }
-    public void setLocation(String location) { this.location = location; }
+    public String getLocation() { 
+        return location; 
+    }
+    public void setLocation(String location) { 
+        this.location = location; 
+    }
 
-    public Double getAvailableCash() { return availableCash; }
-    public void setAvailableCash(Double availableCash) { this.availableCash = availableCash; }
+    public Double getAvailableCash() { 
+        return availableCash; 
+    }
+    public void setAvailableCash(Double availableCash) { 
+        this.availableCash = availableCash; 
+    }
 
-    // Importante para que el JComboBox en la vista muestre el nombre del cajero directamente
     @Override
     public String toString() {
         return location;

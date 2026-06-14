@@ -21,15 +21,31 @@ public class BankAccount extends User {
         this.alias = alias;
     }
 
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    public Long getId() { 
+        return id; 
+    }
+    public void setId(Long id) { 
+        this.id = id; 
+    }
 
-    public Double getBalance() { return balance; }
-    public void setBalance(Double balance) { this.balance = balance; }
+    public Double getBalance() { 
+        return balance; 
+    }
+    public void setBalance(Double balance) { 
+        this.balance = balance; 
+    }
     
-    public Integer getAccountNumber() { return accountNumber; }
-    public void setAccountNumber(Integer accountNumber) { this.accountNumber = accountNumber; }
+    public Integer getAccountNumber() { 
+        return accountNumber; 
+    }
+    public void setAccountNumber(Integer accountNumber) { 
+        this.accountNumber = accountNumber; 
+    }
     
-    public String getAlias() { return alias; }
-    public void setAlias(String alias) { this.alias = alias; }
+    public String getAlias() { 
+        return alias; 
+    }
+    public void setAlias(String alias) { 
+        this.alias = alias; 
+    }
 }
