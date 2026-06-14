@@ -1,6 +1,6 @@
 package controllers;
 
-import dto.TransactionDTO;
+import model.Transaction;
 import model.BankAccount;
 import session.UserSession;
 import views.BalanceView;
@@ -33,7 +33,7 @@ public class BalanceController {
                 return;
             }
 
-            List<TransactionDTO> transactions = transactionService.getTransactionHistory(userId);
+            List<Transaction> transactions = transactionService.getTransactionHistory(userId);
 
             BalanceView balanceView = new BalanceView(parentView, account.getBalance(), transactions);
             balanceView.setVisible(true);
