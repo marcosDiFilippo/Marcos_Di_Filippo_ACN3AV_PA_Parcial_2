@@ -15,8 +15,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import constants.Colors;
+import constants.TransactionType;
 import dto.BankTellerDTO;
-import model.TransactionType;
 
 public class OperationSelectionView extends JFrame {
 

@@ -1,6 +1,6 @@
 package dao;
 
-import dto.TransactionDTO;
+import model.Transaction;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,10 +11,10 @@ import model.DB;
 
 public class TransactionDAO {
     
-    public List<TransactionDTO> findTransactionsByUserId(long userId) throws SQLException {
-        List<TransactionDTO> list = new ArrayList<>();
+    public List<Transaction> findTransactionsByUserId(long userId) throws SQLException {
+        List<Transaction> list = new ArrayList<>();
         Connection conn = DB.getConnection();
-        String sql = "SELECT t.id, ty.name as type, t.amount, t.description, t.created_at " +
+        String sql = "SELECT t.id, ty.name as type, t.amount, t.description, t.created_at, t.user_id " +
                      "FROM bank_transactions t " +
                      "JOIN bank_transaction_types ty ON t.bank_transaction_type_id = ty.id " +
                      "WHERE t.user_id = ? " +
@@ -25,13 +25,91 @@ public class TransactionDAO {
         ResultSet rs = stmt.executeQuery();
         
         while (rs.next()) {
-            TransactionDTO dto = new TransactionDTO();
-            dto.setId(rs.getLong("id"));
-            dto.setType(rs.getString("type"));
-            dto.setAmount(rs.getDouble("amount"));
-            dto.setDescription(rs.getString("description"));
-            dto.setDate(rs.getTimestamp("created_at"));
-            list.add(dto);
+            Transaction transaction = new Transaction();
+            transaction.setId(rs.getLong("id"));
+            transaction.setTypeName(rs.getString("type"));
+            transaction.setAmount(rs.getDouble("amount"));
+            transaction.setDescription(rs.getString("description"));
+            transaction.setCreatedAt(rs.getTimestamp("created_at"));
+            transaction.setUserId(rs.getLong("user_id"));
+            list.add(transaction);
+        }
+        
+        return list;
+    }
+
+    public List<Transaction> findAllTransactions() throws SQLException {
+        List<Transaction> list = new ArrayList<>();
+        Connection conn = DB.getConnection();
+        String sql = "SELECT t.id, ty.name as type, t.amount, t.description, t.created_at, t.user_id " +
+                     "FROM bank_transactions t " +
+                     "JOIN bank_transaction_types ty ON t.bank_transaction_type_id = ty.id " +
+                     "ORDER BY t.created_at DESC";
+                     
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        ResultSet rs = stmt.executeQuery();
+        
+        while (rs.next()) {
+            Transaction transaction = new Transaction();
+            transaction.setId(rs.getLong("id"));
+            transaction.setTypeName(rs.getString("type"));
+            transaction.setAmount(rs.getDouble("amount"));
+            transaction.setDescription(rs.getString("description"));
+            transaction.setCreatedAt(rs.getTimestamp("created_at"));
+            transaction.setUserId(rs.getLong("user_id"));
+            list.add(transaction);
+        }
+        
+        return list;
+    }
+
+    public List<Transaction> findTellerTransactions() throws SQLException {
+        List<Transaction> list = new ArrayList<>();
+        Connection conn = DB.getConnection();
+        String sql = "SELECT t.id, ty.name as type, t.amount, t.description, t.created_at, t.user_id " +
+                     "FROM bank_transactions t " +
+                     "JOIN bank_transaction_types ty ON t.bank_transaction_type_id = ty.id " +
+                     "WHERE ty.name IN ('Deposito', 'Retiro', 'Reposicion Cajero') " +
+                     "ORDER BY t.created_at DESC";
+                     
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        ResultSet rs = stmt.executeQuery();
+        
+        while (rs.next()) {
+            Transaction transaction = new Transaction();
+            transaction.setId(rs.getLong("id"));
+            transaction.setTypeName(rs.getString("type"));
+            transaction.setAmount(rs.getDouble("amount"));
+            transaction.setDescription(rs.getString("description"));
+            transaction.setCreatedAt(rs.getTimestamp("created_at"));
+            transaction.setUserId(rs.getLong("user_id"));
+            list.add(transaction);
+        }
+        
+        return list;
+    }
+
+    public List<Transaction> findTransferTransactions() throws SQLException {
+        List<Transaction> list = new ArrayList<>();
+        Connection conn = DB.getConnection();
+        String sql = "SELECT t.id, ty.name as type, t.amount, t.description, t.created_at, t.user_id " +
+                     "FROM bank_transactions t " +
+                     "JOIN bank_transaction_types ty ON t.bank_transaction_type_id = ty.id " +
+                     "WHERE ty.name = 'Transferencia' " +
+                     "ORDER BY t.created_at DESC";
+                     
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        ResultSet rs = stmt.executeQuery();
+        
+        while (rs.next()) {
+            Transaction transaction = new Transaction();
+            transaction.setId(rs.getLong("id"));
+            transaction.setTypeName(rs.getString("type"));
+            transaction.setAmount(rs.getDouble("amount"));
+            transaction.setDescription(rs.getString("description"));
+            transaction.setCreatedAt(rs.getTimestamp("created_at"));
+            transaction.setUserId(rs.getLong("user_id"));
+            list.add(transaction);
         }
         
         return list;

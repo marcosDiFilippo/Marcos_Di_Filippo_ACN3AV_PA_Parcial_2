@@ -4,15 +4,16 @@ import dao.BankAccountDAO;
 import dao.BankTellerDAO;
 import dao.TransactionDAO;
 import dto.BankTellerDTO;
-import dto.TransactionDTO;
+import model.Transaction;
 import model.BankAccount;
 import model.DB;
 import session.UserSession;
-import model.TransactionType;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
+
+import constants.TransactionType;
 
 public class TransactionService {
 
@@ -156,7 +157,19 @@ public class TransactionService {
         return bankAccountDAO.findByUserId(userId);
     }
 
-    public List<TransactionDTO> getTransactionHistory(long userId) throws SQLException {
+    public List<Transaction> getTransactionHistory(long userId) throws SQLException {
         return transactionDAO.findTransactionsByUserId(userId);
+    }
+
+    public List<Transaction> getAllTransactions() throws SQLException {
+        return transactionDAO.findAllTransactions();
+    }
+
+    public List<Transaction> getTellerTransactions() throws SQLException {
+        return transactionDAO.findTellerTransactions();
+    }
+
+    public List<Transaction> getTransferTransactions() throws SQLException {
+        return transactionDAO.findTransferTransactions();
     }
 }

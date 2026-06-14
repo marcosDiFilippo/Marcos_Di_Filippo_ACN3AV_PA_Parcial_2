@@ -17,11 +17,10 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import constants.Colors;
-import constants.TransactionType;
-import controllers.DepositWithdrawController;
+import controllers.ReplenishController;
 import dto.BankTellerDTO;
 
-public class AmountFormView extends JFrame {
+public class ReplenishAmountView extends JFrame {
 
     private static final long serialVersionUID = 1L;
 
@@ -41,9 +40,9 @@ public class AmountFormView extends JFrame {
     private JButton btnConfirm;
     private JButton btnBack;
 
-    public AmountFormView(JFrame parentView, BankTellerDTO teller, TransactionType operationType) {
-        setTitle(operationType == TransactionType.DEPOSITO ? "Depositar Dinero" : "Retirar Dinero");
-        setSize(500, 400);
+    public ReplenishAmountView(JFrame parentView, BankTellerDTO teller) {
+        setTitle("Reponer Dinero en Cajero");
+        setSize(500, 500);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
         setResizable(false);
@@ -51,7 +50,15 @@ public class AmountFormView extends JFrame {
         contentPane = new JPanel(new GridBagLayout());
         contentPane.setBackground(backgroundColor);
 
-        titleLabel = new JLabel("Ingrese el monto a " + (operationType == TransactionType.DEPOSITO ? "depositar:" : "retirar:"));
+        JLabel locationLabel = new JLabel("Ubicación: " + teller.getLocation());
+        locationLabel.setFont(new Font("Segoe UI", Font.BOLD, 20));
+        locationLabel.setForeground(primaryColor);
+
+        JLabel cashLabel = new JLabel(String.format("Saldo Actual Disponible: $%.2f", teller.getAvailableCash()));
+        cashLabel.setFont(new Font("Segoe UI", Font.BOLD, 20));
+        cashLabel.setForeground(primaryColor);
+
+        titleLabel = new JLabel("Monto a reponer:");
         titleLabel.setFont(titleFont);
         titleLabel.setForeground(primaryColor);
 
@@ -63,7 +70,7 @@ public class AmountFormView extends JFrame {
             BorderFactory.createEmptyBorder(5, 10, 5, 10)
         ));
 
-        btnConfirm = new JButton("Confirmar");
+        btnConfirm = new JButton("Confirmar Reposición");
         btnConfirm.setFont(buttonFont);
         btnConfirm.setBackground(actionAccent);
         btnConfirm.setForeground(whiteColor);
@@ -77,14 +84,10 @@ public class AmountFormView extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 try {
                     double amount = Double.parseDouble(amountField.getText());
-                    DepositWithdrawController controller = new DepositWithdrawController();
-                    if (operationType == TransactionType.DEPOSITO) {
-                        controller.processDeposit(amount, teller, AmountFormView.this, parentView);
-                    } else {
-                        controller.processWithdraw(amount, teller, AmountFormView.this, parentView);
-                    }
+                    ReplenishController controller = new ReplenishController();
+                    controller.processReplenish(teller, amount, ReplenishAmountView.this, parentView);
                 } catch (NumberFormatException ex) {
-                    javax.swing.JOptionPane.showMessageDialog(AmountFormView.this, "Por favor ingrese un monto válido.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                    javax.swing.JOptionPane.showMessageDialog(ReplenishAmountView.this, "Por favor ingrese un monto numérico válido.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
@@ -109,16 +112,24 @@ public class AmountFormView extends JFrame {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
-        gbc.insets = new Insets(20, 20, 20, 20);
-        contentPane.add(titleLabel, gbc);
+        gbc.insets = new Insets(10, 20, 10, 20);
+        contentPane.add(locationLabel, gbc);
 
         gbc.gridy = 1;
-        contentPane.add(amountField, gbc);
+        contentPane.add(cashLabel, gbc);
 
         gbc.gridy = 2;
-        contentPane.add(btnConfirm, gbc);
+        gbc.insets = new Insets(20, 20, 10, 20);
+        contentPane.add(titleLabel, gbc);
 
         gbc.gridy = 3;
+        gbc.insets = new Insets(10, 20, 20, 20);
+        contentPane.add(amountField, gbc);
+
+        gbc.gridy = 4;
+        contentPane.add(btnConfirm, gbc);
+
+        gbc.gridy = 5;
         contentPane.add(btnBack, gbc);
 
         setContentPane(contentPane);

@@ -21,7 +21,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
 import constants.Colors;
-import dto.TransactionDTO;
+import model.Transaction;
 
 public class BalanceView extends JFrame {
 
@@ -45,7 +45,7 @@ public class BalanceView extends JFrame {
     private JScrollPane scrollPane;
     private JTable transactionsTable;
 
-    public BalanceView(JFrame parentView, double currentBalance, List<TransactionDTO> transactions) {
+    public BalanceView(JFrame parentView, double currentBalance, List<Transaction> transactions) {
         setTitle("Saldo y Movimientos");
         setSize(1000, 800);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -101,11 +101,11 @@ public class BalanceView extends JFrame {
             }
         };
 
-        for (TransactionDTO t : transactions) {
+        for (Transaction t : transactions) {
             model.addRow(new Object[]{
                 t.getId(),
-                t.getDate().toString(),
-                t.getType(),
+                t.getCreatedAt().toString(),
+                t.getTypeName(),
                 String.format("$%.2f", t.getAmount()),
                 t.getDescription()
             });

@@ -5,7 +5,7 @@ import java.awt.Color;
 import constants.Colors;
 import controllers.AuthController;
 import controllers.EmployeeController;
-import session.UserSession;
+import controllers.ReplenishController;
 
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -100,7 +100,7 @@ public class DashboardEmployee extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 EmployeeController employeeController = new EmployeeController(DashboardEmployee.this);
-                employeeController.viewAllTransactions();
+                employeeController.openTransactionMenu();
                 dispose();
             }
         });
@@ -113,6 +113,14 @@ public class DashboardEmployee extends JFrame {
         btnReponerDinero.setBorder(BorderFactory.createEmptyBorder(15, 20, 15, 20));
         btnReponerDinero.setCursor(new Cursor(Cursor.HAND_CURSOR));
         btnReponerDinero.setPreferredSize(new Dimension(350, 60));
+
+        btnReponerDinero.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                ReplenishController replenishController = new ReplenishController();
+                replenishController.startReplenishFlow(DashboardEmployee.this);
+            }
+        });
 
         GridBagConstraints gbc1 = new GridBagConstraints();
         gbc1.gridx = 0;
