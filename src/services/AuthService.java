@@ -3,7 +3,7 @@ package services;
 import dao.UserDAO;
 import dto.Auth.LoginDTO;
 import errors.InvalidCredentialsException;
-import helpers.PasswordHasher;
+import errors.UserNotFoundException;
 import model.User;
 import validators.AuthValidator;
 
@@ -18,16 +18,10 @@ public class AuthService {
     public User login(LoginDTO loginDTO) throws Exception {
         AuthValidator.validateLogin(loginDTO);
 
-        User user = userDAO.findByEmail(loginDTO.email);
-        if (user == null) {
+        try {
+            return userDAO.findByCredentials(loginDTO.email, loginDTO.password);
+        } catch (UserNotFoundException e) {
             throw new InvalidCredentialsException("El usuario o la contraseña son incorrectos.");
         }
-        
-        String hashedInput = PasswordHasher.hashSHA256(loginDTO.password);
-        if (!user.getPassword().equals(hashedInput)) {
-            throw new InvalidCredentialsException("El usuario o la contraseña son incorrectos.");
-        }
-        
-        return user;
     }
 }

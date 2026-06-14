@@ -16,6 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import constants.Colors;
 import dto.BankTellerDTO;
+import model.TransactionType;
 
 public class OperationSelectionView extends JFrame {
 
@@ -62,7 +63,7 @@ public class OperationSelectionView extends JFrame {
         btnDeposit.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                AmountFormView form = new AmountFormView(parentView, teller, "DEPOSIT");
+                AmountFormView form = new AmountFormView(parentView, teller, TransactionType.DEPOSITO);
                 form.setVisible(true);
                 dispose();
             }
@@ -80,7 +81,7 @@ public class OperationSelectionView extends JFrame {
         btnWithdraw.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                AmountFormView form = new AmountFormView(parentView, teller, "WITHDRAW");
+                AmountFormView form = new AmountFormView(parentView, teller, TransactionType.RETIRO);
                 form.setVisible(true);
                 dispose();
             }

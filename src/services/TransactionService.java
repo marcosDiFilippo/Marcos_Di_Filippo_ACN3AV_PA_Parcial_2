@@ -8,6 +8,7 @@ import dto.TransactionDTO;
 import model.BankAccount;
 import model.DB;
 import session.UserSession;
+import model.TransactionType;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -47,7 +48,7 @@ public class TransactionService {
             double newCash = teller.getAvailableCash() + amount;
             bankTellerDAO.updateAvailableCash(conn, teller.getId(), newCash);
             
-            long typeId = transactionDAO.getTransactionTypeId(conn, "DEPOSIT");
+            long typeId = transactionDAO.getTransactionTypeId(conn, TransactionType.DEPOSITO.getDbName());
             transactionDAO.insertTransaction(conn, userId, typeId, amount, "Depósito en cajero: " + teller.getLocation());
 
             conn.commit();
@@ -89,7 +90,7 @@ public class TransactionService {
             double newCash = teller.getAvailableCash() - amount;
             bankTellerDAO.updateAvailableCash(conn, teller.getId(), newCash);
             
-            long typeId = transactionDAO.getTransactionTypeId(conn, "WITHDRAW");
+            long typeId = transactionDAO.getTransactionTypeId(conn, TransactionType.RETIRO.getDbName());
             transactionDAO.insertTransaction(conn, userId, typeId, amount, "Retiro en cajero: " + teller.getLocation());
 
             conn.commit();
@@ -137,7 +138,7 @@ public class TransactionService {
             double newDestBalance = destinationAccount.getBalance() + amount;
             bankAccountDAO.updateBalance(conn, destinationAccount.getId(), newDestBalance);
             
-            long typeId = transactionDAO.getTransactionTypeId(conn, "TRANSFER");
+            long typeId = transactionDAO.getTransactionTypeId(conn, TransactionType.TRANSFERENCIA.getDbName());
             long transactionId = transactionDAO.insertTransaction(conn, userId, typeId, amount, "Transferencia a " + destinationAccount.getAlias());
             
             transactionDAO.insertTransfer(conn, transactionId, sourceAccount.getId(), destinationAccount.getId());

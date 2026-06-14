@@ -19,6 +19,7 @@ import javax.swing.JTextField;
 import constants.Colors;
 import controllers.DepositWithdrawController;
 import dto.BankTellerDTO;
+import model.TransactionType;
 
 public class AmountFormView extends JFrame {
 
@@ -40,8 +41,8 @@ public class AmountFormView extends JFrame {
     private JButton btnConfirm;
     private JButton btnBack;
 
-    public AmountFormView(JFrame parentView, BankTellerDTO teller, String operationType) {
-        setTitle(operationType.equals("DEPOSIT") ? "Depositar Dinero" : "Retirar Dinero");
+    public AmountFormView(JFrame parentView, BankTellerDTO teller, TransactionType operationType) {
+        setTitle(operationType == TransactionType.DEPOSITO ? "Depositar Dinero" : "Retirar Dinero");
         setSize(500, 400);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -50,7 +51,7 @@ public class AmountFormView extends JFrame {
         contentPane = new JPanel(new GridBagLayout());
         contentPane.setBackground(backgroundColor);
 
-        titleLabel = new JLabel("Ingrese el monto a " + (operationType.equals("DEPOSIT") ? "depositar:" : "retirar:"));
+        titleLabel = new JLabel("Ingrese el monto a " + (operationType == TransactionType.DEPOSITO ? "depositar:" : "retirar:"));
         titleLabel.setFont(titleFont);
         titleLabel.setForeground(primaryColor);
 
@@ -77,7 +78,7 @@ public class AmountFormView extends JFrame {
                 try {
                     double amount = Double.parseDouble(amountField.getText());
                     DepositWithdrawController controller = new DepositWithdrawController();
-                    if (operationType.equals("DEPOSIT")) {
+                    if (operationType == TransactionType.DEPOSITO) {
                         controller.processDeposit(amount, teller, AmountFormView.this, parentView);
                     } else {
                         controller.processWithdraw(amount, teller, AmountFormView.this, parentView);

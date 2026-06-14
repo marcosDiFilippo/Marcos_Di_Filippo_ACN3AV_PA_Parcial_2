@@ -19,16 +19,17 @@ public class UserDAO {
         this.bankEmployeeDAO = new BankEmployeeDAO();
     }
     
-    public User findByEmail(String email) throws SQLException, UserNotFoundException {
-        String query = "SELECT * FROM users WHERE email = ?";
+    public User findByCredentials(String email, String password) throws SQLException, UserNotFoundException {
+        String query = "SELECT * FROM users WHERE email = ? AND password = SHA2(?, 256)";
         try {
             Connection conn = DB.getConnection();
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setString(1, email);
+            stmt.setString(2, password);
             ResultSet rs = stmt.executeQuery();
             
             if (!rs.next()) {
-                throw new UserNotFoundException("Usuario no encontrado");
+                throw new UserNotFoundException("Usuario no encontrado o contraseña incorrecta");
             }
 
             User user = getTypeUserById(rs.getLong("id"));

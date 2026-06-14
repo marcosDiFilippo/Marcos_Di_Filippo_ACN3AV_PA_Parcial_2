@@ -226,7 +226,7 @@ public class Login extends JFrame {
             JOptionPane.showMessageDialog(this, e.getMessage(), "Error de Autenticación", JOptionPane.ERROR_MESSAGE);
         }
         catch (Exception e) {
-            JOptionPane.showMessageDialog(this, e.getMessage(), "Error de Autenticación", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Ha ocurrido un error inesperado.", "Error de Autenticación", JOptionPane.ERROR_MESSAGE);
         }
     } 
 
