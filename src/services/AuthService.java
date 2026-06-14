@@ -4,8 +4,8 @@ import dao.UserDAO;
 import dto.Auth.LoginDTO;
 import errors.InvalidCredentialsException;
 import errors.UserNotFoundException;
+import errors.ValidationException;
 import model.User;
-import validators.AuthValidator;
 
 public class AuthService {
 
@@ -16,10 +16,22 @@ public class AuthService {
     }
 
     public User login(LoginDTO loginDTO) throws Exception {
-        AuthValidator.validateLogin(loginDTO);
+
+        String email = loginDTO.email;
+        String password = loginDTO.password;
+
+        if (email == null || email.trim().isEmpty()) {
+            throw new ValidationException("El correo electrónico es obligatorio.");
+        }
+        if (!email.contains("@")) {
+            throw new ValidationException("Por favor, ingrese un correo electrónico válido.");
+        }
+        if (password == null || password.trim().isEmpty()) {
+            throw new ValidationException("La contraseña es obligatoria.");
+        }
 
         try {
-            return userDAO.findByCredentials(loginDTO.email, loginDTO.password);
+            return userDAO.findByCredentials(email, password);
         } catch (UserNotFoundException e) {
             throw new InvalidCredentialsException("El usuario o la contraseña son incorrectos.");
         }
