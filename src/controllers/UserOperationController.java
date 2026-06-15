@@ -1,6 +1,5 @@
 package controllers;
 
-import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFrame;
 import model.BankTeller;
@@ -11,7 +10,6 @@ import services.TellerService;
 public class UserOperationController {
 
     private TellerService tellerService;
-    private BankTeller selectedTeller;
 
     public UserOperationController() {
         this.tellerService = new TellerService();
@@ -25,7 +23,6 @@ public class UserOperationController {
     }
 
     public void processTellerSelection(BankTeller selected, JFrame parentView) {
-        this.selectedTeller = selected;
         OperationSelectionView operationSelectionView = new OperationSelectionView(parentView, selected);
         operationSelectionView.setVisible(true);
     }
