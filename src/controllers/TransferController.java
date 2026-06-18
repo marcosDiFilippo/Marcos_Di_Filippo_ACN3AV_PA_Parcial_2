@@ -1,10 +1,11 @@
 package controllers;
 
+import javax.swing.JOptionPane;
+
 import services.TransactionService;
 import views.TransferView;
 
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 
 public class TransferController {
 

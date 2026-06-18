@@ -1,5 +1,7 @@
 package views;
 
+import javax.swing.JOptionPane;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import constants.Colors;
@@ -16,7 +18,6 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -236,7 +237,7 @@ public class Login extends JFrame {
                 Login frame = new Login();
                 frame.setVisible(true);
             } catch (Exception e) {
-                javax.swing.JOptionPane.showMessageDialog(null, "Error al iniciar la vista: " + e.getMessage(), "Error Crítico", javax.swing.JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Error al iniciar la vista: " + e.getMessage(), "Error Crítico", JOptionPane.ERROR_MESSAGE);
             }
         });
     }

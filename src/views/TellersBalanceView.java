@@ -1,14 +1,14 @@
 package views;
 
-import javax.swing.JOptionPane;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -20,8 +20,9 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import constants.Colors;
+import model.BankTeller;
 
-public class TransactionsView extends JFrame {
+public class TellersBalanceView extends JFrame {
 
     private static final long serialVersionUID = 1L;
 
@@ -38,10 +39,10 @@ public class TransactionsView extends JFrame {
     private JLabel titleLabel;
     private JButton btnBack;
     private JScrollPane scrollPane;
-    private JTable transactionsTable;
+    private JTable tellersTable;
 
-    public TransactionsView(JFrame parentView) {
-        setTitle("Historial de Transacciones");
+    public TellersBalanceView(JFrame parentView, List<BankTeller> tellers) {
+        setTitle("Saldo de Cajeros");
         setSize(1000, 800);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -54,7 +55,7 @@ public class TransactionsView extends JFrame {
         headerPanel.setBackground(primaryColor);
         headerPanel.setBorder(BorderFactory.createEmptyBorder(15, 30, 15, 30));
 
-        titleLabel = new JLabel("Historial de Transacciones");
+        titleLabel = new JLabel("Saldo Disponible en Cajeros");
         titleLabel.setFont(titleFont);
         titleLabel.setForeground(whiteColor);
 
@@ -69,7 +70,9 @@ public class TransactionsView extends JFrame {
         btnBack.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                parentView.setVisible(true);
+                if (parentView != null) {
+                    parentView.setVisible(true);
+                }
                 dispose();
             }
         });
@@ -77,7 +80,7 @@ public class TransactionsView extends JFrame {
         headerPanel.add(titleLabel, BorderLayout.WEST);
         headerPanel.add(btnBack, BorderLayout.EAST);
 
-        String[] columnNames = {"ID", "Fecha", "Tipo", "Monto", "Descripción", "ID Usuario"};
+        String[] columnNames = {"ID Cajero", "Ubicación", "Saldo Disponible"};
         DefaultTableModel model = new DefaultTableModel(columnNames, 0) {
             private static final long serialVersionUID = 1L;
             @Override
@@ -86,20 +89,31 @@ public class TransactionsView extends JFrame {
             }
         };
 
-        transactionsTable = new JTable(model);
-        transactionsTable.setFillsViewportHeight(true);
-        transactionsTable.setRowHeight(30);
-        transactionsTable.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-        transactionsTable.setBackground(whiteColor);
-        transactionsTable.setGridColor(secondaryGray);
+        if (tellers != null) {
+            for (BankTeller t : tellers) {
+                Object[] row = {
+                    t.getId(),
+                    t.getLocation(),
+                    "$" + String.format("%.2f", t.getAvailableCash())
+                };
+                model.addRow(row);
+            }
+        }
 
-        JTableHeader tableHeader = transactionsTable.getTableHeader();
+        tellersTable = new JTable(model);
+        tellersTable.setFillsViewportHeight(true);
+        tellersTable.setRowHeight(30);
+        tellersTable.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        tellersTable.setBackground(whiteColor);
+        tellersTable.setGridColor(secondaryGray);
+
+        JTableHeader tableHeader = tellersTable.getTableHeader();
         tableHeader.setBackground(primaryColor);
         tableHeader.setForeground(whiteColor);
         tableHeader.setFont(new Font("Segoe UI", Font.BOLD, 14));
-        tableHeader.setPreferredSize(new java.awt.Dimension(0, 40));
+        tableHeader.setPreferredSize(new Dimension(0, 40));
 
-        scrollPane = new JScrollPane(transactionsTable);
+        scrollPane = new JScrollPane(tellersTable);
         scrollPane.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
         scrollPane.getViewport().setBackground(backgroundColor);
 
@@ -113,18 +127,7 @@ public class TransactionsView extends JFrame {
         return btnBack;
     }
 
-    public JTable getTransactionsTable() {
-        return transactionsTable;
-    }
-
-    public static void main(String[] args) {
-        EventQueue.invokeLater(() -> {
-            try {
-                TransactionsView frame = new TransactionsView(null);
-                frame.setVisible(true);
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "Error al iniciar la vista: " + e.getMessage(), "Error Crítico", JOptionPane.ERROR_MESSAGE);
-            }
-        });
+    public JTable getTellersTable() {
+        return tellersTable;
     }
 }

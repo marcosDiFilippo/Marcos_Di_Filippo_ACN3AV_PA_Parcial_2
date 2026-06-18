@@ -1,5 +1,7 @@
 package services;
 
+import javax.swing.JOptionPane;
+
 import java.util.List;
 
 import constants.TransactionType;
@@ -42,10 +44,10 @@ public class TellerService {
             
             conn.commit();
         } catch (Exception e) {
-            try { conn.rollback(); } catch (SQLException ex) { javax.swing.JOptionPane.showMessageDialog(null, "Error al hacer rollback: " + ex.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE); }
+            try { conn.rollback(); } catch (SQLException ex) { JOptionPane.showMessageDialog(null, "Error al hacer rollback: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE); }
             throw e;
         } finally {
-            try { conn.setAutoCommit(true); } catch (SQLException ex) { javax.swing.JOptionPane.showMessageDialog(null, "Error al restaurar auto-commit: " + ex.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE); }
+            try { conn.setAutoCommit(true); } catch (SQLException ex) { JOptionPane.showMessageDialog(null, "Error al restaurar auto-commit: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE); }
         }
     }
 }

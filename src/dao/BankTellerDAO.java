@@ -1,5 +1,7 @@
 package dao;
 
+import javax.swing.JOptionPane;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -28,7 +30,7 @@ public class BankTellerDAO {
                 tellers.add(teller);
             }
         } catch (SQLException e) {
-            javax.swing.JOptionPane.showMessageDialog(null, "Error al recuperar cajeros: " + e.getMessage(), "Error de Base de Datos", javax.swing.JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error al recuperar cajeros: " + e.getMessage(), "Error de Base de Datos", JOptionPane.ERROR_MESSAGE);
         }
         return tellers;
     }

@@ -1,5 +1,7 @@
 package model;
 
+import javax.swing.JOptionPane;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -20,13 +22,13 @@ public class DB {
             this.connection = DriverManager.getConnection(URL, USER, PASSWORD);
         } catch (ClassNotFoundException e) {
             System.err.println("Error: Driver de MySQL (com.mysql.cj.jdbc.Driver) no encontrado.");
-            javax.swing.JOptionPane.showMessageDialog(null, "Error: Driver de MySQL no encontrado.\n" + e.getMessage(), "Error Crítico", javax.swing.JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error: Driver de MySQL no encontrado.\n" + e.getMessage(), "Error Crítico", JOptionPane.ERROR_MESSAGE);
         } catch (SQLException e) {
             System.err.println("Error: No se pudo conectar a la base de datos MySQL.");
-            javax.swing.JOptionPane.showMessageDialog(null, "Error: No se pudo conectar a la base de datos MySQL.\n" + e.getMessage(), "Error Crítico", javax.swing.JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error: No se pudo conectar a la base de datos MySQL.\n" + e.getMessage(), "Error Crítico", JOptionPane.ERROR_MESSAGE);
         } catch (Exception e) {
             System.err.println("Error: Ha ocurrido un error inesperado.");
-            javax.swing.JOptionPane.showMessageDialog(null, "Error inesperado en la base de datos:\n" + e.getMessage(), "Error Crítico", javax.swing.JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error inesperado en la base de datos:\n" + e.getMessage(), "Error Crítico", JOptionPane.ERROR_MESSAGE);
         }
     }
     

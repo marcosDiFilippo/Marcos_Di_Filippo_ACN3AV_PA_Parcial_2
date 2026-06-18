@@ -1,10 +1,11 @@
 package controllers;
 
+import javax.swing.JOptionPane;
+
 import model.BankTeller;
 import services.TransactionService;
 
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 
 public class DepositWithdrawController {
 

@@ -1,5 +1,7 @@
 package views;
 
+import javax.swing.JOptionPane;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import constants.*;
@@ -164,7 +166,7 @@ public class Home extends JFrame {
 				Home frame = new Home();
 				frame.setVisible(true);
 			} catch (Exception e) {
-				javax.swing.JOptionPane.showMessageDialog(null, "Error al iniciar la vista: " + e.getMessage(), "Error Crítico", javax.swing.JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Error al iniciar la vista: " + e.getMessage(), "Error Crítico", JOptionPane.ERROR_MESSAGE);
 			}
 		});
 	}

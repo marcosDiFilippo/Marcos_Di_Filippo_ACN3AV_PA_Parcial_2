@@ -1,5 +1,7 @@
 package controllers;
 
+import javax.swing.JOptionPane;
+
 import model.Transaction;
 import model.BankAccount;
 import session.UserSession;
@@ -7,7 +9,6 @@ import views.BalanceView;
 import services.TransactionService;
 
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import java.util.List;
 
 public class BalanceController {

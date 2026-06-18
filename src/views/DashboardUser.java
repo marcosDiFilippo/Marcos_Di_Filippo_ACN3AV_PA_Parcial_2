@@ -1,10 +1,15 @@
 package views;
 
+import javax.swing.JOptionPane;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import constants.Colors;
 import controllers.AuthController;
 import controllers.UserOperationController;
+import controllers.BalanceController;
+import controllers.TransferController;
+import session.UserSession;
 
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -60,7 +65,7 @@ public class DashboardUser extends JFrame {
         headerPanel.setBackground(primaryColor);
         headerPanel.setBorder(BorderFactory.createEmptyBorder(15, 30, 15, 30));
 
-        String userName = session.UserSession.getInstance() != null ? session.UserSession.getInstance().getFirstName() + " " + session.UserSession.getInstance().getLastName() : "Cliente";
+        String userName = UserSession.getInstance() != null ? UserSession.getInstance().getFirstName() + " " + UserSession.getInstance().getLastName() : "Cliente";
         welcomeLabel = new JLabel("Bienvenido, " + userName);
         welcomeLabel.setFont(titleFont);
         welcomeLabel.setForeground(whiteColor);
@@ -99,7 +104,7 @@ public class DashboardUser extends JFrame {
         btnConsultar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                controllers.BalanceController balanceController = new controllers.BalanceController();
+                BalanceController balanceController = new BalanceController();
                 balanceController.openBalanceView(DashboardUser.this);
             }
         });
@@ -134,7 +139,7 @@ public class DashboardUser extends JFrame {
         btnTransferir.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                controllers.TransferController transferController = new controllers.TransferController();
+                TransferController transferController = new TransferController();
                 transferController.openTransferView(DashboardUser.this);
             }
         });
@@ -177,7 +182,7 @@ public class DashboardUser extends JFrame {
                 DashboardUser frame = new DashboardUser();
                 frame.setVisible(true);
             } catch (Exception e) {
-                javax.swing.JOptionPane.showMessageDialog(null, "Error al iniciar la vista: " + e.getMessage(), "Error Crítico", javax.swing.JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Error al iniciar la vista: " + e.getMessage(), "Error Crítico", JOptionPane.ERROR_MESSAGE);
             }
         });
     }

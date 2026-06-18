@@ -1,11 +1,14 @@
 package views;
 
+import javax.swing.JOptionPane;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import constants.Colors;
 import controllers.AuthController;
 import controllers.EmployeeController;
 import controllers.ReplenishController;
+import session.UserSession;
 
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -44,6 +47,7 @@ public class DashboardEmployee extends JFrame {
     private JButton btnLogout;
 
     private JButton btnVerTransacciones;
+    private JButton btnVerSaldosCajeros;
     private JButton btnReponerDinero;
     private JButton btnEstadisticas;
 
@@ -61,7 +65,7 @@ public class DashboardEmployee extends JFrame {
         headerPanel.setBackground(primaryColor);
         headerPanel.setBorder(BorderFactory.createEmptyBorder(15, 30, 15, 30));
 
-        String employeeName = session.UserSession.getInstance() != null ? session.UserSession.getInstance().getFirstName() + " " + session.UserSession.getInstance().getLastName() : "Empleado";
+        String employeeName = UserSession.getInstance() != null ? UserSession.getInstance().getFirstName() + " " + UserSession.getInstance().getLastName() : "Empleado";
         welcomeLabel = new JLabel("Panel de Administración - Bienvenido, " + employeeName);
         welcomeLabel.setFont(titleFont);
         welcomeLabel.setForeground(whiteColor);
@@ -106,6 +110,23 @@ public class DashboardEmployee extends JFrame {
             }
         });
 
+        btnVerSaldosCajeros = new JButton("Ver Saldo de Cajeros");
+        btnVerSaldosCajeros.setFont(buttonFont);
+        btnVerSaldosCajeros.setBackground(actionAccent);
+        btnVerSaldosCajeros.setForeground(whiteColor);
+        btnVerSaldosCajeros.setFocusPainted(false);
+        btnVerSaldosCajeros.setBorder(BorderFactory.createEmptyBorder(15, 20, 15, 20));
+        btnVerSaldosCajeros.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        btnVerSaldosCajeros.setPreferredSize(new Dimension(350, 60));
+
+        btnVerSaldosCajeros.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                EmployeeController employeeController = new EmployeeController(DashboardEmployee.this);
+                employeeController.viewTellersBalance();
+            }
+        });
+
         btnReponerDinero = new JButton("Reponer Dinero en Cajero");
         btnReponerDinero.setFont(buttonFont);
         btnReponerDinero.setBackground(actionAccent);
@@ -147,16 +168,23 @@ public class DashboardEmployee extends JFrame {
         gbc1.fill = GridBagConstraints.HORIZONTAL;
         centerPanel.add(btnVerTransacciones, gbc1);
 
+        GridBagConstraints gbc_saldo = new GridBagConstraints();
+        gbc_saldo.gridx = 0;
+        gbc_saldo.gridy = 1;
+        gbc_saldo.insets = new Insets(15, 15, 15, 15);
+        gbc_saldo.fill = GridBagConstraints.HORIZONTAL;
+        centerPanel.add(btnVerSaldosCajeros, gbc_saldo);
+
         GridBagConstraints gbc2 = new GridBagConstraints();
         gbc2.gridx = 0;
-        gbc2.gridy = 1;
+        gbc2.gridy = 2;
         gbc2.insets = new Insets(15, 15, 15, 15);
         gbc2.fill = GridBagConstraints.HORIZONTAL;
         centerPanel.add(btnReponerDinero, gbc2);
 
         GridBagConstraints gbc3 = new GridBagConstraints();
         gbc3.gridx = 0;
-        gbc3.gridy = 2;
+        gbc3.gridy = 3;
         gbc3.insets = new Insets(15, 15, 15, 15);
         gbc3.fill = GridBagConstraints.HORIZONTAL;
         centerPanel.add(btnEstadisticas, gbc3);
@@ -169,6 +197,7 @@ public class DashboardEmployee extends JFrame {
 
     public JButton getBtnLogout() { return btnLogout; }
     public JButton getBtnVerTransacciones() { return btnVerTransacciones; }
+    public JButton getBtnVerSaldosCajeros() { return btnVerSaldosCajeros; }
     public JButton getBtnReponerDinero() { return btnReponerDinero; }
     public JButton getBtnEstadisticas() { return btnEstadisticas; }
 
@@ -178,7 +207,7 @@ public class DashboardEmployee extends JFrame {
                 DashboardEmployee frame = new DashboardEmployee();
                 frame.setVisible(true);
             } catch (Exception e) {
-                javax.swing.JOptionPane.showMessageDialog(null, "Error al iniciar la vista: " + e.getMessage(), "Error Crítico", javax.swing.JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Error al iniciar la vista: " + e.getMessage(), "Error Crítico", JOptionPane.ERROR_MESSAGE);
             }
         });
     }

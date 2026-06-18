@@ -1,5 +1,7 @@
 package views;
 
+import javax.swing.JOptionPane;
+
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -87,7 +89,7 @@ public class ReplenishAmountView extends JFrame {
                     ReplenishController controller = new ReplenishController();
                     controller.processReplenish(teller, amount, ReplenishAmountView.this, parentView);
                 } catch (NumberFormatException ex) {
-                    javax.swing.JOptionPane.showMessageDialog(ReplenishAmountView.this, "Por favor ingrese un monto numérico válido.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(ReplenishAmountView.this, "Por favor ingrese un monto numérico válido.", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });

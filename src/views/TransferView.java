@@ -1,5 +1,7 @@
 package views;
 
+import javax.swing.JOptionPane;
+
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -97,13 +99,13 @@ public class TransferView extends JFrame {
                     double amount = Double.parseDouble(txtAmount.getText());
                     String destination = txtDestination.getText().trim();
                     if (destination.isEmpty()) {
-                        javax.swing.JOptionPane.showMessageDialog(TransferView.this, "Por favor ingrese la cuenta destino.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(TransferView.this, "Por favor ingrese la cuenta destino.", "Error", JOptionPane.ERROR_MESSAGE);
                         return;
                     }
                     TransferController controller = new TransferController();
                     controller.processTransfer(amount, destination, TransferView.this, parentView);
                 } catch (NumberFormatException ex) {
-                    javax.swing.JOptionPane.showMessageDialog(TransferView.this, "Por favor ingrese un monto válido.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(TransferView.this, "Por favor ingrese un monto válido.", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });

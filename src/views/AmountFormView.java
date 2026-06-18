@@ -1,5 +1,7 @@
 package views;
 
+import javax.swing.JOptionPane;
+
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -84,7 +86,7 @@ public class AmountFormView extends JFrame {
                         controller.processWithdraw(amount, teller, AmountFormView.this, parentView);
                     }
                 } catch (NumberFormatException ex) {
-                    javax.swing.JOptionPane.showMessageDialog(AmountFormView.this, "Por favor ingrese un monto válido.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(AmountFormView.this, "Por favor ingrese un monto válido.", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
