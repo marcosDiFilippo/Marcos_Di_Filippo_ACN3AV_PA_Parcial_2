@@ -86,4 +86,24 @@ public class EmployeeController {
             JOptionPane.showMessageDialog(parentView, "Error al cargar transacciones: " + e.getMessage());
         }
     }
+
+    public void viewStatistics() {
+        try {
+            java.util.Map<String, Integer> stats = transactionService.getTransactionStatistics();
+            if (stats.isEmpty()) {
+                JOptionPane.showMessageDialog(parentView, "No hay transacciones registradas aún.", "Estadísticas", JOptionPane.INFORMATION_MESSAGE);
+                return;
+            }
+            
+            StringBuilder sb = new StringBuilder();
+            sb.append("Resumen de Operaciones (Fin del Día):\n\n");
+            for (java.util.Map.Entry<String, Integer> entry : stats.entrySet()) {
+                sb.append("• ").append(entry.getKey()).append(": ").append(entry.getValue()).append(" transacciones\n");
+            }
+            
+            JOptionPane.showMessageDialog(parentView, sb.toString(), "Estadísticas Diarias", JOptionPane.INFORMATION_MESSAGE);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(parentView, "Error al generar estadísticas: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
 }

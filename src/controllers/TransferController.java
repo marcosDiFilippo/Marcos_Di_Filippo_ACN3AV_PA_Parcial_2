@@ -30,7 +30,6 @@ public class TransferController {
             
         } catch (Exception e) {
             JOptionPane.showMessageDialog(currentView, "Error al procesar la transferencia: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            e.printStackTrace();
         }
     }
 }

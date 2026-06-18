@@ -6,7 +6,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import model.DB;
 
 public class TransactionDAO {
@@ -151,5 +153,24 @@ public class TransactionDAO {
         stmt.setLong(2, sourceAccountId);
         stmt.setLong(3, destinationAccountId);
         stmt.executeUpdate();
+    }
+
+    public Map<String, Integer> getTransactionStatistics() throws SQLException {
+        Map<String, Integer> stats = new LinkedHashMap<>();
+        Connection conn = DB.getConnection();
+        String sql = "SELECT ty.name as type, COUNT(*) as total " +
+                     "FROM bank_transactions t " +
+                     "JOIN bank_transaction_types ty ON t.bank_transaction_type_id = ty.id " +
+                     "GROUP BY ty.name " +
+                     "ORDER BY total DESC";
+                     
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        ResultSet rs = stmt.executeQuery();
+        
+        while (rs.next()) {
+            stats.put(rs.getString("type"), rs.getInt("total"));
+        }
+        
+        return stats;
     }
 }

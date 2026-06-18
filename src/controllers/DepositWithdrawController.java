@@ -24,7 +24,6 @@ public class DepositWithdrawController {
             
         } catch (Exception e) {
             JOptionPane.showMessageDialog(currentView, "Error al procesar el depósito: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            e.printStackTrace();
         }
     }
 
@@ -38,7 +37,6 @@ public class DepositWithdrawController {
             
         } catch (Exception e) {
             JOptionPane.showMessageDialog(currentView, "Error al procesar el retiro: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            e.printStackTrace();
         }
     }
 }

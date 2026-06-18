@@ -12,6 +12,7 @@ import session.UserSession;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import constants.TransactionType;
 
@@ -54,10 +55,10 @@ public class TransactionService {
 
             conn.commit();
         } catch (Exception e) {
-            try { conn.rollback(); } catch (SQLException ex) { ex.printStackTrace(); }
+            try { conn.rollback(); } catch (SQLException ex) { javax.swing.JOptionPane.showMessageDialog(null, "Error al hacer rollback: " + ex.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE); }
             throw e;
         } finally {
-            try { conn.setAutoCommit(true); } catch (SQLException ex) { ex.printStackTrace(); }
+            try { conn.setAutoCommit(true); } catch (SQLException ex) { javax.swing.JOptionPane.showMessageDialog(null, "Error al restaurar auto-commit: " + ex.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE); }
         }
     }
 
@@ -96,10 +97,10 @@ public class TransactionService {
 
             conn.commit();
         } catch (Exception e) {
-            try { conn.rollback(); } catch (SQLException ex) { ex.printStackTrace(); }
+            try { conn.rollback(); } catch (SQLException ex) { javax.swing.JOptionPane.showMessageDialog(null, "Error al hacer rollback: " + ex.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE); }
             throw e;
         } finally {
-            try { conn.setAutoCommit(true); } catch (SQLException ex) { ex.printStackTrace(); }
+            try { conn.setAutoCommit(true); } catch (SQLException ex) { javax.swing.JOptionPane.showMessageDialog(null, "Error al restaurar auto-commit: " + ex.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE); }
         }
     }
 
@@ -146,10 +147,10 @@ public class TransactionService {
 
             conn.commit();
         } catch (Exception e) {
-            try { conn.rollback(); } catch (SQLException ex) { ex.printStackTrace(); }
+            try { conn.rollback(); } catch (SQLException ex) { javax.swing.JOptionPane.showMessageDialog(null, "Error al hacer rollback: " + ex.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE); }
             throw e;
         } finally {
-            try { conn.setAutoCommit(true); } catch (SQLException ex) { ex.printStackTrace(); }
+            try { conn.setAutoCommit(true); } catch (SQLException ex) { javax.swing.JOptionPane.showMessageDialog(null, "Error al restaurar auto-commit: " + ex.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE); }
         }
     }
 
@@ -171,5 +172,9 @@ public class TransactionService {
 
     public List<Transaction> getTransferTransactions() throws SQLException {
         return transactionDAO.findTransferTransactions();
+    }
+
+    public Map<String, Integer> getTransactionStatistics() throws SQLException {
+        return transactionDAO.getTransactionStatistics();
     }
 }

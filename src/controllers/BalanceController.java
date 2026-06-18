@@ -41,7 +41,6 @@ public class BalanceController {
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(parentView, "Error al obtener los datos: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            e.printStackTrace();
         }
     }
 }

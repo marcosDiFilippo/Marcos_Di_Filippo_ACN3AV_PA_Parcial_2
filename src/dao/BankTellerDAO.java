@@ -28,7 +28,7 @@ public class BankTellerDAO {
                 tellers.add(teller);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            javax.swing.JOptionPane.showMessageDialog(null, "Error al recuperar cajeros: " + e.getMessage(), "Error de Base de Datos", javax.swing.JOptionPane.ERROR_MESSAGE);
         }
         return tellers;
     }

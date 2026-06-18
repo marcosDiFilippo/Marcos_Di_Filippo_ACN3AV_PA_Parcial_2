@@ -236,7 +236,7 @@ public class Login extends JFrame {
                 Login frame = new Login();
                 frame.setVisible(true);
             } catch (Exception e) {
-                e.printStackTrace();
+                javax.swing.JOptionPane.showMessageDialog(null, "Error al iniciar la vista: " + e.getMessage(), "Error Crítico", javax.swing.JOptionPane.ERROR_MESSAGE);
             }
         });
     }

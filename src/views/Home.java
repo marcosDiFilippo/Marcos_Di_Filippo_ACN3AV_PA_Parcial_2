@@ -112,6 +112,15 @@ public class Home extends JFrame {
         accessButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         accessButton.setPreferredSize(new Dimension(250, 45));
 
+        accessButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                Login login = new Login();
+                login.setVisible(true);
+                dispose();
+            }
+        });
+
         footerLabel = new JLabel("Marcos Di Filippo");
         footerLabel.setFont(footerFont);
         footerLabel.setForeground(whiteColor);
@@ -155,7 +164,7 @@ public class Home extends JFrame {
 				Home frame = new Home();
 				frame.setVisible(true);
 			} catch (Exception e) {
-				e.printStackTrace();
+				javax.swing.JOptionPane.showMessageDialog(null, "Error al iniciar la vista: " + e.getMessage(), "Error Crítico", javax.swing.JOptionPane.ERROR_MESSAGE);
 			}
 		});
 	}

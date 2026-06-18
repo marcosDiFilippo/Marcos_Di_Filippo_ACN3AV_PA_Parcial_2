@@ -45,6 +45,7 @@ public class DashboardEmployee extends JFrame {
 
     private JButton btnVerTransacciones;
     private JButton btnReponerDinero;
+    private JButton btnEstadisticas;
 
     public DashboardEmployee() {
         setTitle("Sistema Bancario - Panel de Empleado");
@@ -122,6 +123,23 @@ public class DashboardEmployee extends JFrame {
             }
         });
 
+        btnEstadisticas = new JButton("Generar Estadísticas del Día");
+        btnEstadisticas.setFont(buttonFont);
+        btnEstadisticas.setBackground(actionAccent);
+        btnEstadisticas.setForeground(whiteColor);
+        btnEstadisticas.setFocusPainted(false);
+        btnEstadisticas.setBorder(BorderFactory.createEmptyBorder(15, 20, 15, 20));
+        btnEstadisticas.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        btnEstadisticas.setPreferredSize(new Dimension(350, 60));
+
+        btnEstadisticas.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                EmployeeController employeeController = new EmployeeController(DashboardEmployee.this);
+                employeeController.viewStatistics();
+            }
+        });
+
         GridBagConstraints gbc1 = new GridBagConstraints();
         gbc1.gridx = 0;
         gbc1.gridy = 0;
@@ -136,6 +154,13 @@ public class DashboardEmployee extends JFrame {
         gbc2.fill = GridBagConstraints.HORIZONTAL;
         centerPanel.add(btnReponerDinero, gbc2);
 
+        GridBagConstraints gbc3 = new GridBagConstraints();
+        gbc3.gridx = 0;
+        gbc3.gridy = 2;
+        gbc3.insets = new Insets(15, 15, 15, 15);
+        gbc3.fill = GridBagConstraints.HORIZONTAL;
+        centerPanel.add(btnEstadisticas, gbc3);
+
         contentPane.add(headerPanel, BorderLayout.NORTH);
         contentPane.add(centerPanel, BorderLayout.CENTER);
 
@@ -145,6 +170,7 @@ public class DashboardEmployee extends JFrame {
     public JButton getBtnLogout() { return btnLogout; }
     public JButton getBtnVerTransacciones() { return btnVerTransacciones; }
     public JButton getBtnReponerDinero() { return btnReponerDinero; }
+    public JButton getBtnEstadisticas() { return btnEstadisticas; }
 
     public static void main(String[] args) {
         EventQueue.invokeLater(() -> {
@@ -152,7 +178,7 @@ public class DashboardEmployee extends JFrame {
                 DashboardEmployee frame = new DashboardEmployee();
                 frame.setVisible(true);
             } catch (Exception e) {
-                e.printStackTrace();
+                javax.swing.JOptionPane.showMessageDialog(null, "Error al iniciar la vista: " + e.getMessage(), "Error Crítico", javax.swing.JOptionPane.ERROR_MESSAGE);
             }
         });
     }

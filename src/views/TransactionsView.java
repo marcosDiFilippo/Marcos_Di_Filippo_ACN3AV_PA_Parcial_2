@@ -43,7 +43,7 @@ public class TransactionsView extends JFrame {
         setSize(1000, 800);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
-        setResizable(false);
+        setResizable(true);
 
         contentPane = new JPanel(new BorderLayout());
         contentPane.setBackground(backgroundColor);
@@ -121,7 +121,7 @@ public class TransactionsView extends JFrame {
                 TransactionsView frame = new TransactionsView(null);
                 frame.setVisible(true);
             } catch (Exception e) {
-                e.printStackTrace();
+                javax.swing.JOptionPane.showMessageDialog(null, "Error al iniciar la vista: " + e.getMessage(), "Error Crítico", javax.swing.JOptionPane.ERROR_MESSAGE);
             }
         });
     }

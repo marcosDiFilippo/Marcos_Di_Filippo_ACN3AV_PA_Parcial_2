@@ -45,7 +45,6 @@ public class DashboardUser extends JFrame {
     private JButton btnConsultar;
     private JButton btnDepositarRetirar;
     private JButton btnTransferir;
-    private JButton btnTestear;
 
     public DashboardUser() {
         setTitle("Sistema Bancario - Panel de Cliente");
@@ -140,15 +139,6 @@ public class DashboardUser extends JFrame {
             }
         });
 
-        btnTestear = new JButton("Testear Funciones del Cajero");
-        btnTestear.setFont(buttonFont);
-        btnTestear.setBackground(actionAccent);
-        btnTestear.setForeground(whiteColor);
-        btnTestear.setFocusPainted(false);
-        btnTestear.setBorder(BorderFactory.createEmptyBorder(15, 20, 15, 20));
-        btnTestear.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        btnTestear.setPreferredSize(new Dimension(350, 60));
-
         GridBagConstraints gbc1 = new GridBagConstraints();
         gbc1.gridx = 0;
         gbc1.gridy = 0;
@@ -170,13 +160,6 @@ public class DashboardUser extends JFrame {
         gbc3.fill = GridBagConstraints.HORIZONTAL;
         centerPanel.add(btnTransferir, gbc3);
 
-        GridBagConstraints gbc4 = new GridBagConstraints();
-        gbc4.gridx = 0;
-        gbc4.gridy = 3;
-        gbc4.insets = new Insets(15, 15, 15, 15);
-        gbc4.fill = GridBagConstraints.HORIZONTAL;
-        centerPanel.add(btnTestear, gbc4);
-
         mainPanel.add(headerPanel, BorderLayout.NORTH);
         mainPanel.add(centerPanel, BorderLayout.CENTER);
 
@@ -187,7 +170,6 @@ public class DashboardUser extends JFrame {
     public JButton getBtnConsultar() { return btnConsultar; }
     public JButton getBtnDepositarRetirar() { return btnDepositarRetirar; }
     public JButton getBtnTransferir() { return btnTransferir; }
-    public JButton getBtnTestear() { return btnTestear; }
 
     public static void main(String[] args) {
         EventQueue.invokeLater(() -> {
@@ -195,7 +177,7 @@ public class DashboardUser extends JFrame {
                 DashboardUser frame = new DashboardUser();
                 frame.setVisible(true);
             } catch (Exception e) {
-                e.printStackTrace();
+                javax.swing.JOptionPane.showMessageDialog(null, "Error al iniciar la vista: " + e.getMessage(), "Error Crítico", javax.swing.JOptionPane.ERROR_MESSAGE);
             }
         });
     }
