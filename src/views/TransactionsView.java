@@ -123,7 +123,7 @@ public class TransactionsView extends JFrame {
                 TransactionsView frame = new TransactionsView(null);
                 frame.setVisible(true);
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "Error al iniciar la vista: " + e.getMessage(), "Error Crítico", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Ha ocurrido un error inesperado.", "Error Crítico", JOptionPane.ERROR_MESSAGE);
             }
         });
     }

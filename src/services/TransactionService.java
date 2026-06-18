@@ -1,7 +1,5 @@
 package services;
 
-import javax.swing.JOptionPane;
-
 import dao.BankAccountDAO;
 import dao.BankTellerDAO;
 import dao.TransactionDAO;
@@ -17,6 +15,11 @@ import java.util.List;
 import java.util.Map;
 
 import constants.TransactionType;
+import errors.AccountNotFoundException;
+import errors.InsufficientFundsException;
+import errors.InvalidAmountException;
+import errors.SameAccountTransferException;
+import errors.TellerOutOfCashException;
 
 public class TransactionService {
 
@@ -32,7 +35,7 @@ public class TransactionService {
 
     public void processDeposit(double amount, BankTeller teller) throws Exception {
         if (amount <= 0) {
-            throw new Exception("El monto debe ser mayor a cero.");
+            throw new InvalidAmountException("El monto debe ser mayor a cero.");
         }
 
         Connection conn = DB.getConnection();
@@ -43,7 +46,7 @@ public class TransactionService {
             BankAccount account = bankAccountDAO.findByUserId(userId);
             
             if (account == null) {
-                throw new Exception("Cuenta no encontrada para el usuario actual.");
+                throw new AccountNotFoundException("Cuenta no encontrada para el usuario actual.");
             }
 
             double newBalance = account.getBalance() + amount;
@@ -57,16 +60,16 @@ public class TransactionService {
 
             conn.commit();
         } catch (Exception e) {
-            try { conn.rollback(); } catch (SQLException ex) { JOptionPane.showMessageDialog(null, "Error al hacer rollback: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE); }
+            if (conn != null) conn.rollback();
             throw e;
         } finally {
-            try { conn.setAutoCommit(true); } catch (SQLException ex) { JOptionPane.showMessageDialog(null, "Error al restaurar auto-commit: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE); }
+            if (conn != null) conn.setAutoCommit(true);
         }
     }
 
     public void processWithdraw(double amount, BankTeller teller) throws Exception {
         if (amount <= 0) {
-            throw new Exception("El monto debe ser mayor a cero.");
+            throw new InvalidAmountException("El monto debe ser mayor a cero.");
         }
 
         Connection conn = DB.getConnection();
@@ -77,15 +80,15 @@ public class TransactionService {
             BankAccount account = bankAccountDAO.findByUserId(userId);
             
             if (account == null) {
-                throw new Exception("Cuenta no encontrada para el usuario actual.");
+                throw new AccountNotFoundException("Cuenta no encontrada para el usuario actual.");
             }
 
             if (account.getBalance() < amount) {
-                throw new Exception("Saldo insuficiente.");
+                throw new InsufficientFundsException("Saldo insuficiente.");
             }
 
             if (teller.getAvailableCash() < amount) {
-                throw new Exception("El cajero no tiene suficiente dinero disponible.");
+                throw new TellerOutOfCashException("El cajero no tiene suficiente dinero disponible.");
             }
 
             double newBalance = account.getBalance() - amount;
@@ -99,16 +102,16 @@ public class TransactionService {
 
             conn.commit();
         } catch (Exception e) {
-            try { conn.rollback(); } catch (SQLException ex) { JOptionPane.showMessageDialog(null, "Error al hacer rollback: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE); }
+            if (conn != null) conn.rollback();
             throw e;
         } finally {
-            try { conn.setAutoCommit(true); } catch (SQLException ex) { JOptionPane.showMessageDialog(null, "Error al restaurar auto-commit: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE); }
+            if (conn != null) conn.setAutoCommit(true);
         }
     }
 
     public void processTransfer(double amount, String destinationInput) throws Exception {
         if (amount <= 0) {
-            throw new Exception("El monto a transferir debe ser mayor a cero.");
+            throw new InvalidAmountException("El monto a transferir debe ser mayor a cero.");
         }
 
         Connection conn = DB.getConnection();
@@ -119,21 +122,21 @@ public class TransactionService {
             BankAccount sourceAccount = bankAccountDAO.findByUserId(userId);
             
             if (sourceAccount == null) {
-                throw new Exception("No se encontró su cuenta.");
+                throw new AccountNotFoundException("No se encontró su cuenta.");
             }
 
             if (sourceAccount.getBalance() < amount) {
-                throw new Exception("Saldo insuficiente para realizar la transferencia.");
+                throw new InsufficientFundsException("Saldo insuficiente para realizar la transferencia.");
             }
 
             BankAccount destinationAccount = bankAccountDAO.findByAccountNumberOrAlias(destinationInput);
 
             if (destinationAccount == null) {
-                throw new Exception("La cuenta destino no existe.");
+                throw new AccountNotFoundException("La cuenta destino no existe.");
             }
 
             if (sourceAccount.getId() == destinationAccount.getId()) {
-                throw new Exception("No puede transferir dinero a su misma cuenta.");
+                throw new SameAccountTransferException("No puede transferir dinero a su misma cuenta.");
             }
 
             double newSourceBalance = sourceAccount.getBalance() - amount;
@@ -149,10 +152,10 @@ public class TransactionService {
 
             conn.commit();
         } catch (Exception e) {
-            try { conn.rollback(); } catch (SQLException ex) { JOptionPane.showMessageDialog(null, "Error al hacer rollback: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE); }
+            if (conn != null) conn.rollback();
             throw e;
         } finally {
-            try { conn.setAutoCommit(true); } catch (SQLException ex) { JOptionPane.showMessageDialog(null, "Error al restaurar auto-commit: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE); }
+            if (conn != null) conn.setAutoCommit(true);
         }
     }
 

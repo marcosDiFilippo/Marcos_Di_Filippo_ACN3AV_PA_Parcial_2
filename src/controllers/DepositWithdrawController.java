@@ -4,6 +4,10 @@ import javax.swing.JOptionPane;
 
 import model.BankTeller;
 import services.TransactionService;
+import errors.AccountNotFoundException;
+import errors.InsufficientFundsException;
+import errors.InvalidAmountException;
+import errors.TellerOutOfCashException;
 
 import javax.swing.JFrame;
 
@@ -23,8 +27,10 @@ public class DepositWithdrawController {
             dashboardView.setVisible(true);
             currentView.dispose();
             
+        } catch (InvalidAmountException | AccountNotFoundException e) {
+            JOptionPane.showMessageDialog(currentView, e.getMessage(), "Error en Depósito", JOptionPane.WARNING_MESSAGE);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(currentView, "Error al procesar el depósito: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(currentView, "Ha ocurrido un error inesperado.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -36,8 +42,10 @@ public class DepositWithdrawController {
             dashboardView.setVisible(true);
             currentView.dispose();
             
+        } catch (InvalidAmountException | AccountNotFoundException | InsufficientFundsException | TellerOutOfCashException e) {
+            JOptionPane.showMessageDialog(currentView, e.getMessage(), "Error en Retiro", JOptionPane.WARNING_MESSAGE);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(currentView, "Error al procesar el retiro: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(currentView, "Ha ocurrido un error inesperado.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 }

@@ -103,7 +103,7 @@ class TransactionTest {
             System.out.println("flujo testeado exitosamente.");
 
         } catch (Exception e) {
-            fail("La orquestación de pruebas falló inesperadamente en algún punto del flujo: " + e.getMessage());
+            fail("Ha ocurrido un error inesperado.");
         }
     }
 }

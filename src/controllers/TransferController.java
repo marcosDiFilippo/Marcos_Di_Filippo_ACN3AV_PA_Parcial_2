@@ -4,6 +4,10 @@ import javax.swing.JOptionPane;
 
 import services.TransactionService;
 import views.TransferView;
+import errors.AccountNotFoundException;
+import errors.InsufficientFundsException;
+import errors.InvalidAmountException;
+import errors.SameAccountTransferException;
 
 import javax.swing.JFrame;
 
@@ -29,8 +33,10 @@ public class TransferController {
             dashboardView.setVisible(true);
             currentView.dispose();
             
+        } catch (InvalidAmountException | AccountNotFoundException | InsufficientFundsException | SameAccountTransferException e) {
+            JOptionPane.showMessageDialog(currentView, e.getMessage(), "Error en Transferencia", JOptionPane.WARNING_MESSAGE);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(currentView, "Error al procesar la transferencia: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(currentView, "Ha ocurrido un error inesperado.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 }

@@ -46,7 +46,7 @@ public class EmployeeController {
             }
             view.setVisible(true);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(parentView, "Error al cargar transacciones: " + e.getMessage());
+            JOptionPane.showMessageDialog(parentView, "Ha ocurrido un error inesperado.");
         }
     }
 
@@ -67,7 +67,7 @@ public class EmployeeController {
             }
             view.setVisible(true);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(parentView, "Error al cargar transacciones: " + e.getMessage());
+            JOptionPane.showMessageDialog(parentView, "Ha ocurrido un error inesperado.");
         }
     }
 
@@ -88,7 +88,7 @@ public class EmployeeController {
             }
             view.setVisible(true);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(parentView, "Error al cargar transacciones: " + e.getMessage());
+            JOptionPane.showMessageDialog(parentView, "Ha ocurrido un error inesperado.");
         }
     }
 
@@ -108,7 +108,7 @@ public class EmployeeController {
             
             JOptionPane.showMessageDialog(parentView, sb.toString(), "Estadísticas Diarias", JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(parentView, "Error al generar estadísticas: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(parentView, "Ha ocurrido un error inesperado.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -120,7 +120,7 @@ public class EmployeeController {
             parentView.setVisible(false);
             view.setVisible(true);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(parentView, "Error al obtener saldos: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(parentView, "Ha ocurrido un error inesperado.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 }

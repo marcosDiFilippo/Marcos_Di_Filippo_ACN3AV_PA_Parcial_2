@@ -1,7 +1,5 @@
 package services;
 
-import javax.swing.JOptionPane;
-
 import java.util.List;
 
 import constants.TransactionType;
@@ -13,6 +11,7 @@ import dao.TransactionDAO;
 import model.BankTeller;
 import model.DB;
 import session.UserSession;
+import errors.InvalidAmountException;
 
 public class TellerService {
 
@@ -28,7 +27,7 @@ public class TellerService {
 
     public void replenishCash(BankTeller teller, double amount) throws Exception {
         if (amount <= 0) {
-            throw new Exception("El monto a reponer debe ser mayor a cero.");
+            throw new InvalidAmountException("El monto a reponer debe ser mayor a cero.");
         }
         Connection conn = DB.getConnection();
         try {
@@ -44,10 +43,10 @@ public class TellerService {
             
             conn.commit();
         } catch (Exception e) {
-            try { conn.rollback(); } catch (SQLException ex) { JOptionPane.showMessageDialog(null, "Error al hacer rollback: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE); }
+            if (conn != null) conn.rollback();
             throw e;
         } finally {
-            try { conn.setAutoCommit(true); } catch (SQLException ex) { JOptionPane.showMessageDialog(null, "Error al restaurar auto-commit: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE); }
+            if (conn != null) conn.setAutoCommit(true);
         }
     }
 }

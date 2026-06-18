@@ -6,6 +6,7 @@ import model.BankTeller;
 import services.TellerService;
 import views.ReplenishTellerSelectionView;
 import views.ReplenishAmountView;
+import errors.InvalidAmountException;
 
 import javax.swing.JFrame;
 import java.util.List;
@@ -25,7 +26,7 @@ public class ReplenishController {
             view.setVisible(true);
             parentView.dispose();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(parentView, "Error al cargar cajeros: " + e.getMessage());
+            JOptionPane.showMessageDialog(parentView, "Ha ocurrido un error inesperado.");
         }
     }
 
@@ -40,8 +41,10 @@ public class ReplenishController {
             JOptionPane.showMessageDialog(currentView, "Dinero repuesto exitosamente.");
             currentView.dispose();
             dashboardView.setVisible(true);
+        } catch (InvalidAmountException e) {
+            JOptionPane.showMessageDialog(currentView, e.getMessage(), "Monto Inválido", JOptionPane.WARNING_MESSAGE);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(currentView, "Error al reponer dinero: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(currentView, "Ha ocurrido un error inesperado.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 }
