@@ -46,10 +46,10 @@ public class DashboardEmployee extends JFrame {
     private JLabel welcomeLabel;
     private JButton btnLogout;
 
-    private JButton btnVerTransacciones;
-    private JButton btnVerSaldosCajeros;
-    private JButton btnReponerDinero;
-    private JButton btnEstadisticas;
+    private JButton btnViewTransactions;
+    private JButton btnViewTellersBalance;
+    private JButton btnReplenishMoney;
+    private JButton btnStatistics;
 
     public DashboardEmployee() {
         setTitle("Sistema Bancario - Panel de Empleado");
@@ -92,16 +92,16 @@ public class DashboardEmployee extends JFrame {
         centerPanel = new JPanel(new GridBagLayout());
         centerPanel.setBackground(backgroundColor);
 
-        btnVerTransacciones = new JButton("Visualizar Todas las Transacciones");
-        btnVerTransacciones.setFont(buttonFont);
-        btnVerTransacciones.setBackground(actionAccent);
-        btnVerTransacciones.setForeground(whiteColor);
-        btnVerTransacciones.setFocusPainted(false);
-        btnVerTransacciones.setBorder(BorderFactory.createEmptyBorder(15, 20, 15, 20));
-        btnVerTransacciones.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        btnVerTransacciones.setPreferredSize(new Dimension(350, 60));
+        btnViewTransactions = new JButton("Visualizar Todas las Transacciones");
+        btnViewTransactions.setFont(buttonFont);
+        btnViewTransactions.setBackground(actionAccent);
+        btnViewTransactions.setForeground(whiteColor);
+        btnViewTransactions.setFocusPainted(false);
+        btnViewTransactions.setBorder(BorderFactory.createEmptyBorder(15, 20, 15, 20));
+        btnViewTransactions.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        btnViewTransactions.setPreferredSize(new Dimension(350, 60));
 
-        btnVerTransacciones.addMouseListener(new MouseAdapter() {
+        btnViewTransactions.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 EmployeeController employeeController = new EmployeeController();
@@ -110,16 +110,16 @@ public class DashboardEmployee extends JFrame {
             }
         });
 
-        btnVerSaldosCajeros = new JButton("Ver Saldo de Cajeros");
-        btnVerSaldosCajeros.setFont(buttonFont);
-        btnVerSaldosCajeros.setBackground(actionAccent);
-        btnVerSaldosCajeros.setForeground(whiteColor);
-        btnVerSaldosCajeros.setFocusPainted(false);
-        btnVerSaldosCajeros.setBorder(BorderFactory.createEmptyBorder(15, 20, 15, 20));
-        btnVerSaldosCajeros.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        btnVerSaldosCajeros.setPreferredSize(new Dimension(350, 60));
+        btnViewTellersBalance = new JButton("Ver Saldo de Cajeros");
+        btnViewTellersBalance.setFont(buttonFont);
+        btnViewTellersBalance.setBackground(actionAccent);
+        btnViewTellersBalance.setForeground(whiteColor);
+        btnViewTellersBalance.setFocusPainted(false);
+        btnViewTellersBalance.setBorder(BorderFactory.createEmptyBorder(15, 20, 15, 20));
+        btnViewTellersBalance.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        btnViewTellersBalance.setPreferredSize(new Dimension(350, 60));
 
-        btnVerSaldosCajeros.addMouseListener(new MouseAdapter() {
+        btnViewTellersBalance.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 EmployeeController employeeController = new EmployeeController();
@@ -127,16 +127,16 @@ public class DashboardEmployee extends JFrame {
             }
         });
 
-        btnReponerDinero = new JButton("Reponer Dinero en Cajero");
-        btnReponerDinero.setFont(buttonFont);
-        btnReponerDinero.setBackground(actionAccent);
-        btnReponerDinero.setForeground(whiteColor);
-        btnReponerDinero.setFocusPainted(false);
-        btnReponerDinero.setBorder(BorderFactory.createEmptyBorder(15, 20, 15, 20));
-        btnReponerDinero.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        btnReponerDinero.setPreferredSize(new Dimension(350, 60));
+        btnReplenishMoney = new JButton("Reponer Dinero en Cajero");
+        btnReplenishMoney.setFont(buttonFont);
+        btnReplenishMoney.setBackground(actionAccent);
+        btnReplenishMoney.setForeground(whiteColor);
+        btnReplenishMoney.setFocusPainted(false);
+        btnReplenishMoney.setBorder(BorderFactory.createEmptyBorder(15, 20, 15, 20));
+        btnReplenishMoney.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        btnReplenishMoney.setPreferredSize(new Dimension(350, 60));
 
-        btnReponerDinero.addMouseListener(new MouseAdapter() {
+        btnReplenishMoney.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 ReplenishController replenishController = new ReplenishController();
@@ -144,16 +144,16 @@ public class DashboardEmployee extends JFrame {
             }
         });
 
-        btnEstadisticas = new JButton("Generar Estadísticas del Día");
-        btnEstadisticas.setFont(buttonFont);
-        btnEstadisticas.setBackground(actionAccent);
-        btnEstadisticas.setForeground(whiteColor);
-        btnEstadisticas.setFocusPainted(false);
-        btnEstadisticas.setBorder(BorderFactory.createEmptyBorder(15, 20, 15, 20));
-        btnEstadisticas.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        btnEstadisticas.setPreferredSize(new Dimension(350, 60));
+        btnStatistics = new JButton("Generar Estadísticas del Día");
+        btnStatistics.setFont(buttonFont);
+        btnStatistics.setBackground(actionAccent);
+        btnStatistics.setForeground(whiteColor);
+        btnStatistics.setFocusPainted(false);
+        btnStatistics.setBorder(BorderFactory.createEmptyBorder(15, 20, 15, 20));
+        btnStatistics.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        btnStatistics.setPreferredSize(new Dimension(350, 60));
 
-        btnEstadisticas.addMouseListener(new MouseAdapter() {
+        btnStatistics.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 EmployeeController employeeController = new EmployeeController();
@@ -166,28 +166,28 @@ public class DashboardEmployee extends JFrame {
         gbc1.gridy = 0;
         gbc1.insets = new Insets(15, 15, 15, 15);
         gbc1.fill = GridBagConstraints.HORIZONTAL;
-        centerPanel.add(btnVerTransacciones, gbc1);
+        centerPanel.add(btnViewTransactions, gbc1);
 
-        GridBagConstraints gbc_saldo = new GridBagConstraints();
-        gbc_saldo.gridx = 0;
-        gbc_saldo.gridy = 1;
-        gbc_saldo.insets = new Insets(15, 15, 15, 15);
-        gbc_saldo.fill = GridBagConstraints.HORIZONTAL;
-        centerPanel.add(btnVerSaldosCajeros, gbc_saldo);
+        GridBagConstraints gbcBalance = new GridBagConstraints();
+        gbcBalance.gridx = 0;
+        gbcBalance.gridy = 1;
+        gbcBalance.insets = new Insets(15, 15, 15, 15);
+        gbcBalance.fill = GridBagConstraints.HORIZONTAL;
+        centerPanel.add(btnViewTellersBalance, gbcBalance);
 
         GridBagConstraints gbc2 = new GridBagConstraints();
         gbc2.gridx = 0;
         gbc2.gridy = 2;
         gbc2.insets = new Insets(15, 15, 15, 15);
         gbc2.fill = GridBagConstraints.HORIZONTAL;
-        centerPanel.add(btnReponerDinero, gbc2);
+        centerPanel.add(btnReplenishMoney, gbc2);
 
         GridBagConstraints gbc3 = new GridBagConstraints();
         gbc3.gridx = 0;
         gbc3.gridy = 3;
         gbc3.insets = new Insets(15, 15, 15, 15);
         gbc3.fill = GridBagConstraints.HORIZONTAL;
-        centerPanel.add(btnEstadisticas, gbc3);
+        centerPanel.add(btnStatistics, gbc3);
 
         contentPane.add(headerPanel, BorderLayout.NORTH);
         contentPane.add(centerPanel, BorderLayout.CENTER);
@@ -196,10 +196,10 @@ public class DashboardEmployee extends JFrame {
     }
 
     public JButton getBtnLogout() { return btnLogout; }
-    public JButton getBtnVerTransacciones() { return btnVerTransacciones; }
-    public JButton getBtnVerSaldosCajeros() { return btnVerSaldosCajeros; }
-    public JButton getBtnReponerDinero() { return btnReponerDinero; }
-    public JButton getBtnEstadisticas() { return btnEstadisticas; }
+    public JButton getBtnViewTransactions() { return btnViewTransactions; }
+    public JButton getBtnViewTellersBalance() { return btnViewTellersBalance; }
+    public JButton getBtnReplenishMoney() { return btnReplenishMoney; }
+    public JButton getBtnStatistics() { return btnStatistics; }
 
     public static void main(String[] args) {
         EventQueue.invokeLater(() -> {

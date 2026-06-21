@@ -71,8 +71,8 @@ public class ReplenishTellerSelectionView extends JFrame {
         gbc.insets = new Insets(10, 20, 10, 20);
 
         for (int i = 0; i < tellers.size(); i++) {
-            BankTeller tellerActual = tellers.get(i);
-            JButton btnTeller = new JButton(tellerActual.toString());
+            BankTeller currentTeller = tellers.get(i);
+            JButton btnTeller = new JButton(currentTeller.toString());
             btnTeller.setFont(buttonFont);
             btnTeller.setBackground(actionAccent);
             btnTeller.setForeground(whiteColor);
@@ -80,13 +80,13 @@ public class ReplenishTellerSelectionView extends JFrame {
             btnTeller.setBorder(BorderFactory.createEmptyBorder(15, 30, 15, 30));
             btnTeller.setCursor(new Cursor(Cursor.HAND_CURSOR));
             btnTeller.setPreferredSize(new Dimension(300, 50));
-            btnTeller.setToolTipText(tellerActual.toString());
+            btnTeller.setToolTipText(currentTeller.toString());
 
             btnTeller.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
                     ReplenishController controller = new ReplenishController();
-                    controller.processTellerSelection(tellerActual, parentView);
+                    controller.processTellerSelection(currentTeller, parentView);
                     dispose();
                 }
             });

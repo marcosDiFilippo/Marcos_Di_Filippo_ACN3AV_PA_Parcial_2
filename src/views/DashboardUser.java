@@ -47,9 +47,9 @@ public class DashboardUser extends JFrame {
     private JLabel welcomeLabel;
     private JButton btnLogout;
 
-    private JButton btnConsultar;
-    private JButton btnDepositarRetirar;
-    private JButton btnTransferir;
+    private JButton btnCheckBalance;
+    private JButton btnDepositWithdraw;
+    private JButton btnTransfer;
 
     public DashboardUser() {
         setTitle("Sistema Bancario - Panel de Cliente");
@@ -92,16 +92,16 @@ public class DashboardUser extends JFrame {
         centerPanel = new JPanel(new GridBagLayout());
         centerPanel.setBackground(backgroundColor);
 
-        btnConsultar = new JButton("Consultar Saldo y Movimientos");
-        btnConsultar.setFont(buttonFont);
-        btnConsultar.setBackground(actionAccent);
-        btnConsultar.setForeground(whiteColor);
-        btnConsultar.setFocusPainted(false);
-        btnConsultar.setBorder(BorderFactory.createEmptyBorder(15, 20, 15, 20));
-        btnConsultar.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        btnConsultar.setPreferredSize(new Dimension(350, 60));
+        btnCheckBalance = new JButton("Consultar Saldo y Movimientos");
+        btnCheckBalance.setFont(buttonFont);
+        btnCheckBalance.setBackground(actionAccent);
+        btnCheckBalance.setForeground(whiteColor);
+        btnCheckBalance.setFocusPainted(false);
+        btnCheckBalance.setBorder(BorderFactory.createEmptyBorder(15, 20, 15, 20));
+        btnCheckBalance.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        btnCheckBalance.setPreferredSize(new Dimension(350, 60));
 
-        btnConsultar.addMouseListener(new MouseAdapter() {
+        btnCheckBalance.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 BalanceController balanceController = new BalanceController();
@@ -109,16 +109,16 @@ public class DashboardUser extends JFrame {
             }
         });
 
-        btnDepositarRetirar = new JButton("Depositar / Retirar Dinero");
-        btnDepositarRetirar.setFont(buttonFont);
-        btnDepositarRetirar.setBackground(actionAccent);
-        btnDepositarRetirar.setForeground(whiteColor);
-        btnDepositarRetirar.setFocusPainted(false);
-        btnDepositarRetirar.setBorder(BorderFactory.createEmptyBorder(15, 20, 15, 20));
-        btnDepositarRetirar.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        btnDepositarRetirar.setPreferredSize(new Dimension(350, 60));
+        btnDepositWithdraw = new JButton("Depositar / Retirar Dinero");
+        btnDepositWithdraw.setFont(buttonFont);
+        btnDepositWithdraw.setBackground(actionAccent);
+        btnDepositWithdraw.setForeground(whiteColor);
+        btnDepositWithdraw.setFocusPainted(false);
+        btnDepositWithdraw.setBorder(BorderFactory.createEmptyBorder(15, 20, 15, 20));
+        btnDepositWithdraw.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        btnDepositWithdraw.setPreferredSize(new Dimension(350, 60));
 
-        btnDepositarRetirar.addMouseListener(new MouseAdapter() {
+        btnDepositWithdraw.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 UserOperationController userOperationController = new UserOperationController();
@@ -127,16 +127,16 @@ public class DashboardUser extends JFrame {
             }
         });
 
-        btnTransferir = new JButton("Transferir a Otra Cuenta");
-        btnTransferir.setFont(buttonFont);
-        btnTransferir.setBackground(actionAccent);
-        btnTransferir.setForeground(whiteColor);
-        btnTransferir.setFocusPainted(false);
-        btnTransferir.setBorder(BorderFactory.createEmptyBorder(15, 20, 15, 20));
-        btnTransferir.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        btnTransferir.setPreferredSize(new Dimension(350, 60));
+        btnTransfer = new JButton("Transferir a Otra Cuenta");
+        btnTransfer.setFont(buttonFont);
+        btnTransfer.setBackground(actionAccent);
+        btnTransfer.setForeground(whiteColor);
+        btnTransfer.setFocusPainted(false);
+        btnTransfer.setBorder(BorderFactory.createEmptyBorder(15, 20, 15, 20));
+        btnTransfer.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        btnTransfer.setPreferredSize(new Dimension(350, 60));
 
-        btnTransferir.addMouseListener(new MouseAdapter() {
+        btnTransfer.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 TransferController transferController = new TransferController();
@@ -149,21 +149,21 @@ public class DashboardUser extends JFrame {
         gbc1.gridy = 0;
         gbc1.insets = new Insets(15, 15, 15, 15);
         gbc1.fill = GridBagConstraints.HORIZONTAL;
-        centerPanel.add(btnConsultar, gbc1);
+        centerPanel.add(btnCheckBalance, gbc1);
 
         GridBagConstraints gbc2 = new GridBagConstraints();
         gbc2.gridx = 0;
         gbc2.gridy = 1;
         gbc2.insets = new Insets(15, 15, 15, 15);
         gbc2.fill = GridBagConstraints.HORIZONTAL;
-        centerPanel.add(btnDepositarRetirar, gbc2);
+        centerPanel.add(btnDepositWithdraw, gbc2);
 
         GridBagConstraints gbc3 = new GridBagConstraints();
         gbc3.gridx = 0;
         gbc3.gridy = 2;
         gbc3.insets = new Insets(15, 15, 15, 15);
         gbc3.fill = GridBagConstraints.HORIZONTAL;
-        centerPanel.add(btnTransferir, gbc3);
+        centerPanel.add(btnTransfer, gbc3);
 
         mainPanel.add(headerPanel, BorderLayout.NORTH);
         mainPanel.add(centerPanel, BorderLayout.CENTER);
@@ -172,9 +172,9 @@ public class DashboardUser extends JFrame {
     }
 
     public JButton getBtnLogout() { return btnLogout; }
-    public JButton getBtnConsultar() { return btnConsultar; }
-    public JButton getBtnDepositarRetirar() { return btnDepositarRetirar; }
-    public JButton getBtnTransferir() { return btnTransferir; }
+    public JButton getBtnCheckBalance() { return btnCheckBalance; }
+    public JButton getBtnDepositWithdraw() { return btnDepositWithdraw; }
+    public JButton getBtnTransfer() { return btnTransfer; }
 
     public static void main(String[] args) {
         EventQueue.invokeLater(() -> {
