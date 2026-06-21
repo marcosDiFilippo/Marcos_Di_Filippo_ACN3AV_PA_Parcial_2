@@ -161,6 +161,7 @@ public class TransactionDAO {
         String sql = "SELECT ty.name as type, COUNT(*) as total " +
                      "FROM bank_transactions t " +
                      "JOIN bank_transaction_types ty ON t.bank_transaction_type_id = ty.id " +
+                     "WHERE DATE(t.created_at) = CURDATE() " +
                      "GROUP BY ty.name " +
                      "ORDER BY total DESC";
                      

@@ -85,7 +85,7 @@ public class Login extends JFrame {
                 BorderFactory.createEmptyBorder(30, 40, 40, 40)
         ));
 
-        logoLabel = new JLabel("\uD83C\uDFE6 Sistema Bancario");
+        logoLabel = new JLabel("Sistema Bancario");
         logoLabel.setFont(logoFont);
         logoLabel.setForeground(whiteColor);
 

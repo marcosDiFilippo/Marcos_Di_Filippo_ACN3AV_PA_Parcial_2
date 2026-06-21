@@ -95,7 +95,7 @@ public class Home extends JFrame {
         loginButton.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
         loginButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
-        welcomeTitleLabel = new JLabel("Bienvenido a Bank System");
+        welcomeTitleLabel = new JLabel("Bienvenido al Sistema Bancario");
         welcomeTitleLabel.setFont(titleFont);
         welcomeTitleLabel.setForeground(primaryColor);
         welcomeTitleLabel.setHorizontalAlignment(SwingConstants.CENTER);
