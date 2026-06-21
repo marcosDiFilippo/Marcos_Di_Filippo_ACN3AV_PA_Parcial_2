@@ -16,20 +16,18 @@ import java.util.Map;
 
 public class EmployeeController {
 
-    private JFrame parentView;
     private TransactionService transactionService;
 
-    public EmployeeController(JFrame parentView) {
-        this.parentView = parentView;
+    public EmployeeController() {
         this.transactionService = new TransactionService();
     }
 
-    public void openTransactionMenu() {
+    public void openTransactionMenu(JFrame parentView) {
         EmployeeTransactionMenuView menuView = new EmployeeTransactionMenuView(parentView);
         menuView.setVisible(true);
     }
 
-    public void viewAllTransactions() {
+    public void viewAllTransactions(JFrame parentView) {
         try {
             List<Transaction> list = transactionService.getAllTransactions();
             TransactionsView view = new TransactionsView(parentView);
@@ -50,7 +48,7 @@ public class EmployeeController {
         }
     }
 
-    public void viewTellerTransactions() {
+    public void viewTellerTransactions(JFrame parentView) {
         try {
             List<Transaction> list = transactionService.getTellerTransactions();
             TransactionsView view = new TransactionsView(parentView);
@@ -71,7 +69,7 @@ public class EmployeeController {
         }
     }
 
-    public void viewTransferTransactions() {
+    public void viewTransferTransactions(JFrame parentView) {
         try {
             List<Transaction> list = transactionService.getTransferTransactions();
             TransactionsView view = new TransactionsView(parentView);
@@ -92,7 +90,7 @@ public class EmployeeController {
         }
     }
 
-    public void viewStatistics() {
+    public void viewStatistics(JFrame parentView) {
         try {
             Map<String, Integer> stats = transactionService.getTransactionStatistics();
             if (stats.isEmpty()) {
@@ -112,7 +110,7 @@ public class EmployeeController {
         }
     }
 
-    public void viewTellersBalance() {
+    public void viewTellersBalance(JFrame parentView) {
         try {
             TellerService tellerService = new TellerService();
             List<BankTeller> tellers = tellerService.getAllTellers();

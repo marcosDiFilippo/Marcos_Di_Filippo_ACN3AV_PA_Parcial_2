@@ -104,8 +104,8 @@ public class DashboardEmployee extends JFrame {
         btnVerTransacciones.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                EmployeeController employeeController = new EmployeeController(DashboardEmployee.this);
-                employeeController.openTransactionMenu();
+                EmployeeController employeeController = new EmployeeController();
+                employeeController.openTransactionMenu(DashboardEmployee.this);
                 dispose();
             }
         });
@@ -122,8 +122,8 @@ public class DashboardEmployee extends JFrame {
         btnVerSaldosCajeros.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                EmployeeController employeeController = new EmployeeController(DashboardEmployee.this);
-                employeeController.viewTellersBalance();
+                EmployeeController employeeController = new EmployeeController();
+                employeeController.viewTellersBalance(DashboardEmployee.this);
             }
         });
 
@@ -156,8 +156,8 @@ public class DashboardEmployee extends JFrame {
         btnEstadisticas.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                EmployeeController employeeController = new EmployeeController(DashboardEmployee.this);
-                employeeController.viewStatistics();
+                EmployeeController employeeController = new EmployeeController();
+                employeeController.viewStatistics(DashboardEmployee.this);
             }
         });
 

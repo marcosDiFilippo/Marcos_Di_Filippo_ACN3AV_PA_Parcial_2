@@ -80,8 +80,8 @@ public class EmployeeTransactionMenuView extends JFrame {
         btnGeneral.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                EmployeeController controller = new EmployeeController(parentView);
-                controller.viewAllTransactions();
+                EmployeeController controller = new EmployeeController();
+                controller.viewAllTransactions(parentView);
                 dispose();
             }
         });
@@ -89,8 +89,8 @@ public class EmployeeTransactionMenuView extends JFrame {
         btnTellers.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                EmployeeController controller = new EmployeeController(parentView);
-                controller.viewTellerTransactions();
+                EmployeeController controller = new EmployeeController();
+                controller.viewTellerTransactions(parentView);
                 dispose();
             }
         });
@@ -98,8 +98,8 @@ public class EmployeeTransactionMenuView extends JFrame {
         btnTransfers.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                EmployeeController controller = new EmployeeController(parentView);
-                controller.viewTransferTransactions();
+                EmployeeController controller = new EmployeeController();
+                controller.viewTransferTransactions(parentView);
                 dispose();
             }
         });
