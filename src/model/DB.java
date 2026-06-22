@@ -21,7 +21,7 @@ public class DB {
             
             this.connection = DriverManager.getConnection(URL, USER, PASSWORD);
         } catch (ClassNotFoundException e) {
-            System.err.println("Error: Driver de MySQL (com.mysql.cj.jdbc.Driver) no encontrado.");
+            System.err.println("Error: Driver de MySQL no encontrado.");
             JOptionPane.showMessageDialog(null, "Ha ocurrido un error inesperado.", "Error Crítico", JOptionPane.ERROR_MESSAGE);
         } catch (SQLException e) {
             System.err.println("Error: No se pudo conectar a la base de datos MySQL.");
