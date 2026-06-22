@@ -31,11 +31,15 @@ public class DB {
             JOptionPane.showMessageDialog(null, "Ha ocurrido un error inesperado.", "Error Crítico", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
-    public static Connection getConnection() {
+
+    private static DB getInstance () {
         if (instance == null) {
             instance = new DB();
         }
-        return instance.connection;
+        return instance;
+    }
+     
+    public static Connection getConnection() {
+        return getInstance().connection;
     }
 }
