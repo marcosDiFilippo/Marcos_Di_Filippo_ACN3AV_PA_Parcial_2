@@ -7,6 +7,7 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import dto.OperationDTO;
 import model.BankAccount;
 import model.BankTeller;
 import services.TellerService;
@@ -36,13 +37,13 @@ class TransactionTest {
 
     private void testFuncionalidadDeposito() throws Exception {
         assertDoesNotThrow(() -> {
-            transactionService.processDeposit(500.0, testTeller);
+            transactionService.processDeposit(new OperationDTO(500.0, testTeller));
         }, "El depósito de $500 debe procesarse sin arrojar excepciones.");
     }
 
     private void testFuncionalidadRetiroExitoso() throws Exception {
         assertDoesNotThrow(() -> {
-            transactionService.processWithdraw(200.0, testTeller);
+            transactionService.processWithdraw(new OperationDTO(200.0, testTeller));
         }, "El retiro de $200 debe procesarse sin arrojar excepciones (ya que se depositaron fondos previamente).");
     }
 
@@ -54,7 +55,7 @@ class TransactionTest {
 
     private void testValidacionRetiroSinFondos() {
         Exception exception = assertThrows(Exception.class, () -> {
-            transactionService.processWithdraw(10000000.0, testTeller);
+            transactionService.processWithdraw(new OperationDTO(10000000.0, testTeller));
         });
         assertTrue(exception.getMessage().contains("Saldo insuficiente"), 
             "El sistema debe bloquear y lanzar excepción por saldo insuficiente.");
@@ -62,7 +63,7 @@ class TransactionTest {
 
     private void testValidacionDepositoNegativo() {
         Exception exception = assertThrows(Exception.class, () -> {
-            transactionService.processDeposit(-50.0, testTeller);
+            transactionService.processDeposit(new OperationDTO(-50.0, testTeller));
         });
         assertTrue(exception.getMessage().contains("mayor a cero"), 
             "El sistema debe bloquear y lanzar excepción por monto de depósito inválido.");
@@ -80,7 +81,7 @@ class TransactionTest {
             testFuncionalidadRetiroExitoso(); 
             testFuncionalidadTransferencia();
 
-            transactionService.processWithdraw(200.0, testTeller);
+            transactionService.processWithdraw(new OperationDTO(200.0, testTeller));
 
             assertTrue(true); 
 
