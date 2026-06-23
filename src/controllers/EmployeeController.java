@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import java.util.List;
 import model.Transaction;
 import services.TransactionService;
+import views.DashboardEmployee;
 import views.TransactionsView;
 import views.EmployeeTransactionMenuView;
 import views.TellersBalanceView;
@@ -128,7 +129,7 @@ public class EmployeeController {
 
     public void goBackToDashboard(JFrame currentView) {
         currentView.dispose();
-        new views.DashboardEmployee().setVisible(true);
+        new DashboardEmployee().setVisible(true);
     }
 
     public void goBackToTransactionMenu(JFrame currentView) {

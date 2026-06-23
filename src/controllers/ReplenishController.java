@@ -4,6 +4,7 @@ import javax.swing.JOptionPane;
 
 import model.BankTeller;
 import services.TellerService;
+import views.DashboardEmployee;
 import views.ReplenishTellerSelectionView;
 import views.ReplenishAmountView;
 import errors.InvalidAmountException;
@@ -41,7 +42,7 @@ public class ReplenishController {
             tellerService.replenishCash(teller, amount);
             JOptionPane.showMessageDialog(currentView, "Dinero repuesto exitosamente.");
             currentView.dispose();
-            new views.DashboardEmployee().setVisible(true);
+            new DashboardEmployee().setVisible(true);
         } catch (InvalidAmountException e) {
             JOptionPane.showMessageDialog(currentView, e.getMessage(), "Monto Inválido", JOptionPane.WARNING_MESSAGE);
         } catch (Exception e) {
@@ -51,7 +52,7 @@ public class ReplenishController {
 
     public void goBackToDashboard(JFrame currentView) {
         currentView.dispose();
-        new views.DashboardEmployee().setVisible(true);
+        new DashboardEmployee().setVisible(true);
     }
 
     public void goBackToTellerSelection(JFrame currentView) {

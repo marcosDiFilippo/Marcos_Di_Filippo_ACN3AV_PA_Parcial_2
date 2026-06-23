@@ -21,6 +21,7 @@ import javax.swing.JTextField;
 import constants.Colors;
 import constants.TransactionType;
 import controllers.DepositWithdrawController;
+import dto.OperationDTO;
 import model.BankTeller;
 
 public class AmountFormView extends JFrame {
@@ -79,10 +80,11 @@ public class AmountFormView extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 try {
                     double amount = Double.parseDouble(amountField.getText());
+                    OperationDTO dto = new OperationDTO(amount, teller);
                     if (operationType == TransactionType.DEPOSITO) {
-                        controller.processDeposit(amount, teller, AmountFormView.this);
+                        controller.processDeposit(dto, AmountFormView.this);
                     } else {
-                        controller.processWithdraw(amount, teller, AmountFormView.this);
+                        controller.processWithdraw(dto, AmountFormView.this);
                     }
                 } catch (NumberFormatException ex) {
                     JOptionPane.showMessageDialog(AmountFormView.this, "Por favor ingrese un monto válido.", "Error", JOptionPane.ERROR_MESSAGE);

@@ -6,6 +6,7 @@ import model.Transaction;
 import model.BankAccount;
 import session.UserSession;
 import views.BalanceView;
+import views.DashboardUser;
 import services.TransactionService;
 
 import javax.swing.JFrame;
@@ -47,6 +48,6 @@ public class BalanceController {
     
     public void goBack(JFrame currentView) {
         currentView.dispose();
-        new views.DashboardUser().setVisible(true);
+        new DashboardUser().setVisible(true);
     }
 }

@@ -11,7 +11,10 @@ import errors.TellerOutOfCashException;
 
 import javax.swing.JFrame;
 import constants.TransactionType;
+import dto.OperationDTO;
 import views.AmountFormView;
+import views.DashboardUser;
+import views.OperationSelectionView;
 
 public class DepositWithdrawController {
 
@@ -27,13 +30,13 @@ public class DepositWithdrawController {
         currentView.dispose();
     }
 
-    public void processDeposit(double amount, BankTeller teller, JFrame currentView) {
+    public void processDeposit(OperationDTO dto, JFrame currentView) {
         try {
-            transactionService.processDeposit(amount, teller);
+            transactionService.processDeposit(dto);
             JOptionPane.showMessageDialog(currentView, "Depósito realizado con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
             
             currentView.dispose();
-            new views.DashboardUser().setVisible(true);
+            new DashboardUser().setVisible(true);
             
         } catch (InvalidAmountException | AccountNotFoundException e) {
             JOptionPane.showMessageDialog(currentView, e.getMessage(), "Error en Depósito", JOptionPane.WARNING_MESSAGE);
@@ -42,13 +45,13 @@ public class DepositWithdrawController {
         }
     }
 
-    public void processWithdraw(double amount, BankTeller teller, JFrame currentView) {
+    public void processWithdraw(OperationDTO dto, JFrame currentView) {
         try {
-            transactionService.processWithdraw(amount, teller);
+            transactionService.processWithdraw(dto);
             JOptionPane.showMessageDialog(currentView, "Retiro realizado con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
             
             currentView.dispose();
-            new views.DashboardUser().setVisible(true);
+            new DashboardUser().setVisible(true);
             
         } catch (InvalidAmountException | AccountNotFoundException | InsufficientFundsException | TellerOutOfCashException e) {
             JOptionPane.showMessageDialog(currentView, e.getMessage(), "Error en Retiro", JOptionPane.WARNING_MESSAGE);
@@ -58,9 +61,9 @@ public class DepositWithdrawController {
     }
     
     public void goBackToOperationSelection(JFrame currentView, BankTeller teller) {
-        controllers.UserOperationController userOpController = new controllers.UserOperationController();
+        UserOperationController userOpController = new UserOperationController();
         currentView.dispose();
-        views.OperationSelectionView view = new views.OperationSelectionView(userOpController, teller);
+        OperationSelectionView view = new OperationSelectionView(userOpController, teller);
         view.setVisible(true);
     }
 }

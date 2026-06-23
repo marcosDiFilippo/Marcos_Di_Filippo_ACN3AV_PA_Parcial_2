@@ -3,6 +3,7 @@ package controllers;
 import java.util.List;
 import javax.swing.JFrame;
 import model.BankTeller;
+import views.DashboardUser;
 import views.OperationSelectionView;
 import views.TellerSelectionView;
 import services.TellerService;
@@ -30,7 +31,7 @@ public class UserOperationController {
 
     public void goBackToDashboard(JFrame currentView) {
         currentView.dispose();
-        new views.DashboardUser().setVisible(true);
+        new DashboardUser().setVisible(true);
     }
 
     public void goBackToTellerSelection(JFrame currentView) {

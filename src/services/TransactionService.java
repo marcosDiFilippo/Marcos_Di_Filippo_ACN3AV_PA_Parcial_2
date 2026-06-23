@@ -3,6 +3,7 @@ package services;
 import dao.BankAccountDAO;
 import dao.BankTellerDAO;
 import dao.TransactionDAO;
+import dto.OperationDTO;
 import model.Transaction;
 import model.BankAccount;
 import model.BankTeller;
@@ -33,7 +34,9 @@ public class TransactionService {
         this.transactionDAO = new TransactionDAO();
     }
 
-    public void processDeposit(double amount, BankTeller teller) throws Exception {
+    public void processDeposit(OperationDTO dto) throws Exception {
+        double amount = dto.getAmount();
+        BankTeller teller = dto.getTeller();
         if (amount <= 0) {
             throw new InvalidAmountException("El monto debe ser mayor a cero.");
         }
@@ -67,7 +70,9 @@ public class TransactionService {
         }
     }
 
-    public void processWithdraw(double amount, BankTeller teller) throws Exception {
+    public void processWithdraw(dto.OperationDTO dto) throws Exception {
+        double amount = dto.getAmount();
+        BankTeller teller = dto.getTeller();
         if (amount <= 0) {
             throw new InvalidAmountException("El monto debe ser mayor a cero.");
         }

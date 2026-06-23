@@ -3,6 +3,7 @@ package controllers;
 import javax.swing.JOptionPane;
 
 import services.TransactionService;
+import views.DashboardUser;
 import views.TransferView;
 import errors.AccountNotFoundException;
 import errors.InsufficientFundsException;
@@ -27,7 +28,7 @@ public class TransferController {
     
     public void cancelTransfer(JFrame currentView) {
         currentView.dispose();
-        new views.DashboardUser().setVisible(true);
+        new DashboardUser().setVisible(true);
     }
 
     public void processTransfer(double amount, String destinationInput, JFrame currentView) {
@@ -36,7 +37,7 @@ public class TransferController {
             JOptionPane.showMessageDialog(currentView, "Transferencia realizada con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
             
             currentView.dispose();
-            new views.DashboardUser().setVisible(true);
+            new DashboardUser().setVisible(true);
             
         } catch (InvalidAmountException | AccountNotFoundException | InsufficientFundsException | SameAccountTransferException e) {
             JOptionPane.showMessageDialog(currentView, e.getMessage(), "Error en Transferencia", JOptionPane.WARNING_MESSAGE);
