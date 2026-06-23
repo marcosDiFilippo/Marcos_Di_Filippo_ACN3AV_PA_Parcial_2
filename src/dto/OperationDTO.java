@@ -15,15 +15,7 @@ public class OperationDTO {
         return amount;
     }
 
-    public void setAmount(double amount) {
-        this.amount = amount;
-    }
-
     public BankTeller getTeller() {
         return teller;
-    }
-
-    public void setTeller(BankTeller teller) {
-        this.teller = teller;
     }
 }
