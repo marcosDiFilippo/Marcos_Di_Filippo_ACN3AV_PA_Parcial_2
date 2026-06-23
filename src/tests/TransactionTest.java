@@ -35,43 +35,54 @@ class TransactionTest {
         }
     }
 
-    private void testFuncionalidadDeposito() throws Exception {
-        assertDoesNotThrow(() -> {
+    private void testFuncionalidadDeposito() {
+        try {
             transactionService.processDeposit(new OperationDTO(500.0, testTeller));
-        }, "El depósito de $500 debe procesarse sin arrojar excepciones.");
+            assertTrue(true, "El depósito de $500 funcionó sin problemas");
+        } catch (Exception e) {
+            fail("algo falló al intentar depositar los $500: " + e.getMessage());
+        }
     }
 
-    private void testFuncionalidadRetiroExitoso() throws Exception {
-        assertDoesNotThrow(() -> {
+    private void testFuncionalidadRetiroExitoso() {
+        try {
             transactionService.processWithdraw(new OperationDTO(200.0, testTeller));
-        }, "El retiro de $200 debe procesarse sin arrojar excepciones (ya que se depositaron fondos previamente).");
+            assertTrue(true, "El retiro de $200 salió bien");
+        } catch (Exception e) {
+            fail("Hubo un problema al retirar los $200: " + e.getMessage());
+        }
     }
 
-    private void testFuncionalidadTransferencia() throws Exception {
-        assertDoesNotThrow(() -> {
+    private void testFuncionalidadTransferencia() {
+        try {
             transactionService.processTransfer(100.0, "maria.lopez.banco");
-        }, "La transferencia de $100 a maria.lopez.banco debe procesarse correctamente.");
+            assertTrue(true, "La transferencia de $100 llegó a su destino");
+        } catch (Exception e) {
+            fail("No se pudo completar la transferencia: " + e.getMessage());
+        }
     }
 
     private void testValidacionRetiroSinFondos() {
-        Exception exception = assertThrows(Exception.class, () -> {
+        try {
             transactionService.processWithdraw(new OperationDTO(10000000.0, testTeller));
-        });
-        assertTrue(exception.getMessage().contains("Saldo insuficiente"), 
-            "El sistema debe bloquear y lanzar excepción por saldo insuficiente.");
+            fail("el retiro debería haber fallado porque la cuenta no tiene mucho dinero");
+        } catch (Exception e) {
+            assertTrue(e.getMessage().contains("Saldo insuficiente"), "Esperábamos un error por falta de saldo, pero saltó otra cosa.");
+        }
     }
 
     private void testValidacionDepositoNegativo() {
-        Exception exception = assertThrows(Exception.class, () -> {
+        try {
             transactionService.processDeposit(new OperationDTO(-50.0, testTeller));
-        });
-        assertTrue(exception.getMessage().contains("mayor a cero"), 
-            "El sistema debe bloquear y lanzar excepción por monto de depósito inválido.");
+            fail("Debería haber fallado al intentar depositar un monto negativo.");
+        } catch (Exception e) {
+            assertTrue(e.getMessage().contains("mayor a cero"), "El error debería habernos avisado que el monto no puede ser negativo.");
+        }
     }
 
     @Test
     void testFlujoOrquestadoDelCajero() {
-        assertNotNull(testTeller, "Error crítico: No hay cajeros disponibles en la BD para probar.");
+        assertNotNull(testTeller, "No pudimos encontrar ningún cajero en la base de datos para hacer la prueba.");
 
         try {
             testValidacionRetiroSinFondos();
@@ -85,10 +96,10 @@ class TransactionTest {
 
             assertTrue(true); 
 
-            System.out.println("flujo testeado exitosamente.");
+            System.out.println("Todo el recorrido del usuario en el cajero se probó con éxito");
 
         } catch (Exception e) {
-            fail("Ha ocurrido un error inesperado.");
+            fail("Algo rompio la prueba general.");
         }
     }
 }
