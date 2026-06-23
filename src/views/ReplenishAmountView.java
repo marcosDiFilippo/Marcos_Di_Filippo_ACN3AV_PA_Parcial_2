@@ -42,7 +42,7 @@ public class ReplenishAmountView extends JFrame {
     private JButton btnConfirm;
     private JButton btnBack;
 
-    public ReplenishAmountView(JFrame parentView, BankTeller teller) {
+    public ReplenishAmountView(ReplenishController controller, BankTeller teller) {
         setTitle("Reponer Dinero en Cajero");
         setSize(500, 500);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -86,8 +86,7 @@ public class ReplenishAmountView extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 try {
                     double amount = Double.parseDouble(amountField.getText());
-                    ReplenishController controller = new ReplenishController();
-                    controller.processReplenish(teller, amount, ReplenishAmountView.this, parentView);
+                    controller.processReplenish(teller, amount, ReplenishAmountView.this);
                 } catch (NumberFormatException ex) {
                     JOptionPane.showMessageDialog(ReplenishAmountView.this, "Por favor ingrese un monto numérico válido.", "Error", JOptionPane.ERROR_MESSAGE);
                 }
@@ -106,8 +105,7 @@ public class ReplenishAmountView extends JFrame {
         btnBack.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                parentView.setVisible(true);
-                dispose();
+                controller.goBackToTellerSelection(ReplenishAmountView.this);
             }
         });
 

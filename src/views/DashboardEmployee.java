@@ -106,7 +106,6 @@ public class DashboardEmployee extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 EmployeeController employeeController = new EmployeeController();
                 employeeController.openTransactionMenu(DashboardEmployee.this);
-                dispose();
             }
         });
 

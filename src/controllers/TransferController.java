@@ -19,19 +19,24 @@ public class TransferController {
         this.transactionService = new TransactionService();
     }
 
-    public void openTransferView(JFrame parentView) {
-        TransferView transferView = new TransferView(parentView);
+    public void openTransferView(JFrame currentView) {
+        TransferView transferView = new TransferView(this);
         transferView.setVisible(true);
-        parentView.dispose();
+        currentView.dispose();
+    }
+    
+    public void cancelTransfer(JFrame currentView) {
+        currentView.dispose();
+        new views.DashboardUser().setVisible(true);
     }
 
-    public void processTransfer(double amount, String destinationInput, JFrame currentView, JFrame dashboardView) {
+    public void processTransfer(double amount, String destinationInput, JFrame currentView) {
         try {
             transactionService.processTransfer(amount, destinationInput);
             JOptionPane.showMessageDialog(currentView, "Transferencia realizada con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
             
-            dashboardView.setVisible(true);
             currentView.dispose();
+            new views.DashboardUser().setVisible(true);
             
         } catch (InvalidAmountException | AccountNotFoundException | InsufficientFundsException | SameAccountTransferException e) {
             JOptionPane.showMessageDialog(currentView, e.getMessage(), "Error en Transferencia", JOptionPane.WARNING_MESSAGE);

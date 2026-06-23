@@ -20,6 +20,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import constants.Colors;
+import controllers.EmployeeController;
 import model.BankTeller;
 
 public class TellersBalanceView extends JFrame {
@@ -41,7 +42,7 @@ public class TellersBalanceView extends JFrame {
     private JScrollPane scrollPane;
     private JTable tellersTable;
 
-    public TellersBalanceView(JFrame parentView, List<BankTeller> tellers) {
+    public TellersBalanceView(EmployeeController controller, List<BankTeller> tellers) {
         setTitle("Saldo de Cajeros");
         setSize(1000, 800);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -70,10 +71,7 @@ public class TellersBalanceView extends JFrame {
         btnBack.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if (parentView != null) {
-                    parentView.setVisible(true);
-                }
-                dispose();
+                controller.goBackToDashboard(TellersBalanceView.this);
             }
         });
 

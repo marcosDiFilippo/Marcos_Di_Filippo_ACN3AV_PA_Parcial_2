@@ -43,7 +43,7 @@ public class AmountFormView extends JFrame {
     private JButton btnConfirm;
     private JButton btnBack;
 
-    public AmountFormView(JFrame parentView, BankTeller teller, TransactionType operationType) {
+    public AmountFormView(DepositWithdrawController controller, BankTeller teller, TransactionType operationType) {
         setTitle(operationType == TransactionType.DEPOSITO ? "Depositar Dinero" : "Retirar Dinero");
         setSize(500, 400);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -79,11 +79,10 @@ public class AmountFormView extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 try {
                     double amount = Double.parseDouble(amountField.getText());
-                    DepositWithdrawController controller = new DepositWithdrawController();
                     if (operationType == TransactionType.DEPOSITO) {
-                        controller.processDeposit(amount, teller, AmountFormView.this, parentView);
+                        controller.processDeposit(amount, teller, AmountFormView.this);
                     } else {
-                        controller.processWithdraw(amount, teller, AmountFormView.this, parentView);
+                        controller.processWithdraw(amount, teller, AmountFormView.this);
                     }
                 } catch (NumberFormatException ex) {
                     JOptionPane.showMessageDialog(AmountFormView.this, "Por favor ingrese un monto válido.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -103,8 +102,7 @@ public class AmountFormView extends JFrame {
         btnBack.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                parentView.setVisible(true);
-                dispose();
+                controller.goBackToOperationSelection(AmountFormView.this, teller);
             }
         });
 

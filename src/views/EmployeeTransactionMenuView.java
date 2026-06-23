@@ -46,7 +46,7 @@ public class EmployeeTransactionMenuView extends JFrame {
     private JButton btnTransfers;
     private JButton btnBack;
 
-    public EmployeeTransactionMenuView(JFrame parentView) {
+    public EmployeeTransactionMenuView(EmployeeController controller) {
         setTitle("Menú de Transacciones");
         setSize(600, 500);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -80,27 +80,21 @@ public class EmployeeTransactionMenuView extends JFrame {
         btnGeneral.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                EmployeeController controller = new EmployeeController();
-                controller.viewAllTransactions(parentView);
-                dispose();
+                controller.viewAllTransactions(EmployeeTransactionMenuView.this);
             }
         });
 
         btnTellers.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                EmployeeController controller = new EmployeeController();
-                controller.viewTellerTransactions(parentView);
-                dispose();
+                controller.viewTellerTransactions(EmployeeTransactionMenuView.this);
             }
         });
 
         btnTransfers.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                EmployeeController controller = new EmployeeController();
-                controller.viewTransferTransactions(parentView);
-                dispose();
+                controller.viewTransferTransactions(EmployeeTransactionMenuView.this);
             }
         });
 
@@ -127,8 +121,7 @@ public class EmployeeTransactionMenuView extends JFrame {
         btnBack.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                parentView.setVisible(true);
-                dispose();
+                controller.goBackToDashboard(EmployeeTransactionMenuView.this);
             }
         });
 

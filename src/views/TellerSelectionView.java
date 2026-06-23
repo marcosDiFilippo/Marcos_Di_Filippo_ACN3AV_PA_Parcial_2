@@ -43,7 +43,7 @@ public class TellerSelectionView extends JFrame {
     private JLabel titleLabel;
     private JButton btnBack;
 
-    public TellerSelectionView(JFrame parentView, List<BankTeller> tellers) {
+    public TellerSelectionView(UserOperationController controller, List<BankTeller> tellers) {
         setTitle("Seleccionar Cajero");
         setSize(1000, 800);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -85,9 +85,7 @@ public class TellerSelectionView extends JFrame {
             btnTeller.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                    UserOperationController controller = new UserOperationController();
-                    controller.processTellerSelection(currentTeller, parentView);
-                    dispose();
+                    controller.processTellerSelection(currentTeller, TellerSelectionView.this);
                 }
             });
 
@@ -109,8 +107,7 @@ public class TellerSelectionView extends JFrame {
         btnBack.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                parentView.setVisible(true);
-                dispose();
+                controller.goBackToDashboard(TellerSelectionView.this);
             }
         });
 

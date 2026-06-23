@@ -19,9 +19,9 @@ public class BalanceController {
         this.transactionService = new TransactionService();
     }
 
-    public void openBalanceView(JFrame parentView) {
+    public void openBalanceView(JFrame currentView) {
         if (UserSession.getInstance() == null) {
-            JOptionPane.showMessageDialog(parentView, "Sesión no válida", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(currentView, "Sesión no válida", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
@@ -30,18 +30,23 @@ public class BalanceController {
         try {
             BankAccount account = transactionService.getAccountDetails(userId);
             if (account == null) {
-                JOptionPane.showMessageDialog(parentView, "No se encontró una cuenta para el usuario actual", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(currentView, "No se encontró una cuenta para el usuario actual", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
             List<Transaction> transactions = transactionService.getTransactionHistory(userId);
 
-            BalanceView balanceView = new BalanceView(parentView, account.getBalance(), transactions);
+            BalanceView balanceView = new BalanceView(this, account.getBalance(), transactions);
             balanceView.setVisible(true);
-            parentView.dispose();
+            currentView.dispose();
 
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(parentView, "Ha ocurrido un error inesperado.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(currentView, "Ha ocurrido un error inesperado.", "Error", JOptionPane.ERROR_MESSAGE);
         }
+    }
+    
+    public void goBack(JFrame currentView) {
+        currentView.dispose();
+        new views.DashboardUser().setVisible(true);
     }
 }

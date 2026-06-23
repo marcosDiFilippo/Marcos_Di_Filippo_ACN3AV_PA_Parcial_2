@@ -45,7 +45,7 @@ public class TransferView extends JFrame {
     private JButton btnTransfer;
     private JButton btnBack;
 
-    public TransferView(JFrame parentView) {
+    public TransferView(TransferController controller) {
         setTitle("Transferir Dinero");
         setSize(500, 500);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -102,8 +102,7 @@ public class TransferView extends JFrame {
                         JOptionPane.showMessageDialog(TransferView.this, "Por favor ingrese la cuenta destino.", "Error", JOptionPane.ERROR_MESSAGE);
                         return;
                     }
-                    TransferController controller = new TransferController();
-                    controller.processTransfer(amount, destination, TransferView.this, parentView);
+                    controller.processTransfer(amount, destination, TransferView.this);
                 } catch (NumberFormatException ex) {
                     JOptionPane.showMessageDialog(TransferView.this, "Por favor ingrese un monto válido.", "Error", JOptionPane.ERROR_MESSAGE);
                 }
@@ -122,8 +121,7 @@ public class TransferView extends JFrame {
         btnBack.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                parentView.setVisible(true);
-                dispose();
+                controller.cancelTransfer(TransferView.this);
             }
         });
 

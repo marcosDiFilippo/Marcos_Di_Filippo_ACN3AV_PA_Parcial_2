@@ -43,7 +43,7 @@ public class ReplenishTellerSelectionView extends JFrame {
     private JLabel titleLabel;
     private JButton btnBack;
 
-    public ReplenishTellerSelectionView(JFrame parentView, List<BankTeller> tellers) {
+    public ReplenishTellerSelectionView(ReplenishController controller, List<BankTeller> tellers) {
         setTitle("Seleccionar Cajero para Reponer Dinero");
         setSize(1000, 800);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -85,9 +85,7 @@ public class ReplenishTellerSelectionView extends JFrame {
             btnTeller.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                    ReplenishController controller = new ReplenishController();
-                    controller.processTellerSelection(currentTeller, parentView);
-                    dispose();
+                    controller.processTellerSelection(currentTeller, ReplenishTellerSelectionView.this);
                 }
             });
 
@@ -109,8 +107,7 @@ public class ReplenishTellerSelectionView extends JFrame {
         btnBack.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                parentView.setVisible(true);
-                dispose();
+                controller.goBackToDashboard(ReplenishTellerSelectionView.this);
             }
         });
 

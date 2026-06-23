@@ -15,15 +15,25 @@ public class UserOperationController {
         this.tellerService = new TellerService();
     }
 
-    public void openTellerSelection(JFrame parentView) {
+    public void openTellerSelection(JFrame currentView) {
         List<BankTeller> tellers = tellerService.getAllTellers();
-        TellerSelectionView view = new TellerSelectionView(parentView, tellers);
+        TellerSelectionView view = new TellerSelectionView(this, tellers);
         view.setVisible(true);
-        parentView.dispose();
+        currentView.dispose();
     }
 
-    public void processTellerSelection(BankTeller selected, JFrame parentView) {
-        OperationSelectionView operationSelectionView = new OperationSelectionView(parentView, selected);
+    public void processTellerSelection(BankTeller selected, JFrame currentView) {
+        OperationSelectionView operationSelectionView = new OperationSelectionView(this, selected);
         operationSelectionView.setVisible(true);
+        currentView.dispose();
+    }
+
+    public void goBackToDashboard(JFrame currentView) {
+        currentView.dispose();
+        new views.DashboardUser().setVisible(true);
+    }
+
+    public void goBackToTellerSelection(JFrame currentView) {
+        openTellerSelection(currentView);
     }
 }

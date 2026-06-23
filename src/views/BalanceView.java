@@ -21,6 +21,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
 import constants.Colors;
+import controllers.BalanceController;
 import model.Transaction;
 
 public class BalanceView extends JFrame {
@@ -45,7 +46,7 @@ public class BalanceView extends JFrame {
     private JScrollPane scrollPane;
     private JTable transactionsTable;
 
-    public BalanceView(JFrame parentView, double currentBalance, List<Transaction> transactions) {
+    public BalanceView(BalanceController controller, double currentBalance, List<Transaction> transactions) {
         setTitle("Saldo y Movimientos");
         setSize(1000, 800);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -74,8 +75,7 @@ public class BalanceView extends JFrame {
         btnBack.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                parentView.setVisible(true);
-                dispose();
+                controller.goBack(BalanceView.this);
             }
         });
 

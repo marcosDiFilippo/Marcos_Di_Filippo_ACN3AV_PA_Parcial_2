@@ -16,6 +16,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import constants.Colors;
 import constants.TransactionType;
+import controllers.DepositWithdrawController;
+import controllers.UserOperationController;
 import model.BankTeller;
 
 public class OperationSelectionView extends JFrame {
@@ -37,7 +39,7 @@ public class OperationSelectionView extends JFrame {
     private JButton btnWithdraw;
     private JButton btnBack;
 
-    public OperationSelectionView(JFrame parentView, BankTeller teller) {
+    public OperationSelectionView(UserOperationController controller, BankTeller teller) {
         setTitle("Seleccionar Operación");
         setSize(600, 500);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -63,9 +65,8 @@ public class OperationSelectionView extends JFrame {
         btnDeposit.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                AmountFormView form = new AmountFormView(parentView, teller, TransactionType.DEPOSITO);
-                form.setVisible(true);
-                dispose();
+                DepositWithdrawController dwController = new DepositWithdrawController();
+                dwController.openAmountForm(OperationSelectionView.this, teller, TransactionType.DEPOSITO);
             }
         });
 
@@ -81,9 +82,8 @@ public class OperationSelectionView extends JFrame {
         btnWithdraw.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                AmountFormView form = new AmountFormView(parentView, teller, TransactionType.RETIRO);
-                form.setVisible(true);
-                dispose();
+                DepositWithdrawController dwController = new DepositWithdrawController();
+                dwController.openAmountForm(OperationSelectionView.this, teller, TransactionType.RETIRO);
             }
         });
 
@@ -99,8 +99,7 @@ public class OperationSelectionView extends JFrame {
         btnBack.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                parentView.setVisible(true);
-                dispose();
+                controller.goBackToTellerSelection(OperationSelectionView.this);
             }
         });
 

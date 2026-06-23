@@ -19,32 +19,42 @@ public class ReplenishController {
         this.tellerService = new TellerService();
     }
 
-    public void startReplenishFlow(JFrame parentView) {
+    public void startReplenishFlow(JFrame currentView) {
         try {
             List<BankTeller> tellers = tellerService.getAllTellers();
-            ReplenishTellerSelectionView view = new ReplenishTellerSelectionView(parentView, tellers);
+            ReplenishTellerSelectionView view = new ReplenishTellerSelectionView(this, tellers);
             view.setVisible(true);
-            parentView.dispose();
+            currentView.dispose();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(parentView, "Ha ocurrido un error inesperado.");
+            JOptionPane.showMessageDialog(currentView, "Ha ocurrido un error inesperado.");
         }
     }
 
-    public void processTellerSelection(BankTeller selected, JFrame parentView) {
-        ReplenishAmountView view = new ReplenishAmountView(parentView, selected);
+    public void processTellerSelection(BankTeller selected, JFrame currentView) {
+        ReplenishAmountView view = new ReplenishAmountView(this, selected);
         view.setVisible(true);
+        currentView.dispose();
     }
 
-    public void processReplenish(BankTeller teller, double amount, JFrame currentView, JFrame dashboardView) {
+    public void processReplenish(BankTeller teller, double amount, JFrame currentView) {
         try {
             tellerService.replenishCash(teller, amount);
             JOptionPane.showMessageDialog(currentView, "Dinero repuesto exitosamente.");
             currentView.dispose();
-            dashboardView.setVisible(true);
+            new views.DashboardEmployee().setVisible(true);
         } catch (InvalidAmountException e) {
             JOptionPane.showMessageDialog(currentView, e.getMessage(), "Monto Inválido", JOptionPane.WARNING_MESSAGE);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(currentView, "Ha ocurrido un error inesperado.", "Error", JOptionPane.ERROR_MESSAGE);
         }
+    }
+
+    public void goBackToDashboard(JFrame currentView) {
+        currentView.dispose();
+        new views.DashboardEmployee().setVisible(true);
+    }
+
+    public void goBackToTellerSelection(JFrame currentView) {
+        startReplenishFlow(currentView);
     }
 }

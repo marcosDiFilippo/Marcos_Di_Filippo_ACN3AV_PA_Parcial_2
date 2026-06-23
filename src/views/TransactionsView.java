@@ -20,6 +20,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import constants.Colors;
+import controllers.EmployeeController;
 
 public class TransactionsView extends JFrame {
 
@@ -40,7 +41,7 @@ public class TransactionsView extends JFrame {
     private JScrollPane scrollPane;
     private JTable transactionsTable;
 
-    public TransactionsView(JFrame parentView) {
+    public TransactionsView(EmployeeController controller) {
         setTitle("Historial de Transacciones");
         setSize(1000, 800);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -69,8 +70,7 @@ public class TransactionsView extends JFrame {
         btnBack.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                parentView.setVisible(true);
-                dispose();
+                controller.goBackToTransactionMenu(TransactionsView.this);
             }
         });
 
@@ -120,7 +120,7 @@ public class TransactionsView extends JFrame {
     public static void main(String[] args) {
         EventQueue.invokeLater(() -> {
             try {
-                TransactionsView frame = new TransactionsView(null);
+                TransactionsView frame = new TransactionsView(new EmployeeController());
                 frame.setVisible(true);
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "Ha ocurrido un error inesperado.", "Error Crítico", JOptionPane.ERROR_MESSAGE);
