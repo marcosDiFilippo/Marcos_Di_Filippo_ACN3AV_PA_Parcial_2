@@ -70,7 +70,7 @@ public class TransactionService {
         }
     }
 
-    public void processWithdraw(dto.OperationDTO dto) throws Exception {
+    public void processWithdraw(OperationDTO dto) throws Exception {
         double amount = dto.getAmount();
         BankTeller teller = dto.getTeller();
         if (amount <= 0) {
