@@ -61,7 +61,7 @@ public class Login extends JFrame {
     private JButton submitButton;
 
     public Login() {
-        setTitle("Sistema Bancario - Iniciar Sesión");
+        setTitle("Banco Sin Backup - Iniciar Sesión");
         setSize(1000, 800);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null); 
@@ -85,7 +85,7 @@ public class Login extends JFrame {
                 BorderFactory.createEmptyBorder(30, 40, 40, 40)
         ));
 
-        logoLabel = new JLabel("Sistema Bancario");
+        logoLabel = new JLabel("Banco Sin Backup");
         logoLabel.setFont(logoFont);
         logoLabel.setForeground(whiteColor);
 
@@ -217,7 +217,7 @@ public class Login extends JFrame {
 
         try {
             authController.login(loginDTO);
-            JOptionPane.showMessageDialog(this, "¡Bienvenido al Sistema Bancario!", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "¡Bienvenido al Banco Sin Backup!", "Éxito", JOptionPane.INFORMATION_MESSAGE);
             dispose();
         } 
         catch (ValidationException e) {
