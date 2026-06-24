@@ -55,7 +55,7 @@ public class Home extends JFrame {
     private JLabel footerLabel;
     
     public Home() {
-    	setTitle("Banco Sin Backup - Inicio");
+    	setTitle("Banco Commit & Pray - Inicio");
         setSize(1000, 800);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -75,7 +75,7 @@ public class Home extends JFrame {
         footerPanel.setBackground(primaryColor);
         footerPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
-        logoLabel = new JLabel("Banco Sin Backup");
+        logoLabel = new JLabel("Banco Commit & Pray");
         logoLabel.setFont(logoFont);
         logoLabel.setForeground(whiteColor);
 
@@ -95,7 +95,7 @@ public class Home extends JFrame {
         loginButton.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
         loginButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
-        welcomeTitleLabel = new JLabel("Bienvenido al Banco Sin Backup");
+        welcomeTitleLabel = new JLabel("Bienvenido al Banco Commit & Pray");
         welcomeTitleLabel.setFont(titleFont);
         welcomeTitleLabel.setForeground(primaryColor);
         welcomeTitleLabel.setHorizontalAlignment(SwingConstants.CENTER);

@@ -52,7 +52,7 @@ public class DashboardUser extends JFrame {
     private JButton btnTransfer;
 
     public DashboardUser() {
-        setTitle("Banco Sin Backup - Panel de Cliente");
+        setTitle("Banco Commit & Pray - Panel de Cliente");
         setSize(1000, 800);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);

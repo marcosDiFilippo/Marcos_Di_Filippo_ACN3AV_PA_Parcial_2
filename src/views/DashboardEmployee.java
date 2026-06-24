@@ -52,7 +52,7 @@ public class DashboardEmployee extends JFrame {
     private JButton btnStatistics;
 
     public DashboardEmployee() {
-        setTitle("Banco Sin Backup - Panel de Empleado");
+        setTitle("Banco Commit & Pray - Panel de Empleado");
         setSize(1000, 800);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
