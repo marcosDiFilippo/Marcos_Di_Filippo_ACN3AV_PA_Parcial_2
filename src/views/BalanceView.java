@@ -92,7 +92,7 @@ public class BalanceView extends JFrame {
         balanceLabel.setHorizontalAlignment(SwingConstants.CENTER);
         balancePanel.add(balanceLabel, BorderLayout.CENTER);
 
-        String[] columnNames = {"ID", "Fecha", "Tipo", "Monto", "Descripción"};
+        String[] columnNames = {"Fecha", "Tipo", "Monto", "Descripción"};
         DefaultTableModel model = new DefaultTableModel(columnNames, 0) {
             private static final long serialVersionUID = 1L;
             @Override
@@ -103,7 +103,6 @@ public class BalanceView extends JFrame {
 
         for (Transaction t : transactions) {
             model.addRow(new Object[]{
-                t.getId(),
                 t.getCreatedAt().toString(),
                 t.getTypeName(),
                 String.format("$%.2f", t.getAmount()),
