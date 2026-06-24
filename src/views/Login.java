@@ -24,7 +24,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import controllers.AuthController;
-import dto.Auth.LoginDTO;
+import dto.LoginDTO;
 import errors.InvalidCredentialsException;
 import errors.ValidationException;
 

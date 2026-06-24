@@ -1,4 +1,4 @@
-package dto.Auth;
+package dto;
 
 public class LoginDTO {
     public String email;

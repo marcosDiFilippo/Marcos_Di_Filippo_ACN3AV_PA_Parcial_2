@@ -1,7 +1,8 @@
 package controllers;
 
 import javax.swing.JFrame;
-import dto.Auth.LoginDTO;
+
+import dto.LoginDTO;
 import model.User;
 import session.UserSession;
 import views.DashboardEmployee;

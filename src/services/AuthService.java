@@ -1,7 +1,7 @@
 package services;
 
 import dao.UserDAO;
-import dto.Auth.LoginDTO;
+import dto.LoginDTO;
 import errors.InvalidCredentialsException;
 import errors.UserNotFoundException;
 import errors.ValidationException;
