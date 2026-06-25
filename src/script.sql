@@ -1,10 +1,6 @@
 CREATE DATABASE bank_system;
 USE bank_system;
 
--- ==========================================
--- USERS
--- ==========================================
-
 CREATE TABLE users (
     id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     first_name VARCHAR(100) NOT NULL,
@@ -16,10 +12,6 @@ CREATE TABLE users (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB;
-
--- ==========================================
--- BANK ACCOUNTS
--- ==========================================
 
 CREATE TABLE bank_accounts (
     id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -34,10 +26,6 @@ CREATE TABLE bank_accounts (
         ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
--- ==========================================
--- BANK EMPLOYEES
--- ==========================================
-
 CREATE TABLE bank_employees (
     id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     user_id BIGINT UNSIGNED NOT NULL UNIQUE,
@@ -48,28 +36,16 @@ CREATE TABLE bank_employees (
         ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
--- ==========================================
--- BANK TELLERS (CAJEROS AUTOMATICOS)
--- ==========================================
-
 CREATE TABLE bank_tellers (
     id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     location VARCHAR(255) NOT NULL,
     available_cash DECIMAL(15,2) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB;
 
--- ==========================================
--- TRANSACTION TYPES
--- ==========================================
-
 CREATE TABLE bank_transaction_types (
     id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL UNIQUE
 ) ENGINE=InnoDB;
-
--- ==========================================
--- TRANSACTIONS
--- ==========================================
 
 CREATE TABLE bank_transactions (
     id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -93,10 +69,6 @@ CREATE TABLE bank_transactions (
         REFERENCES bank_transaction_types(id)
 ) ENGINE=InnoDB;
 
--- ==========================================
--- TRANSACTIONS <-> TELLERS
--- ==========================================
-
 CREATE TABLE bank_transactions_tellers (
     id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 
@@ -114,10 +86,6 @@ CREATE TABLE bank_transactions_tellers (
         REFERENCES bank_tellers(id)
         ON DELETE CASCADE
 ) ENGINE=InnoDB;
-
--- ==========================================
--- TRANSFERS
--- ==========================================
 
 CREATE TABLE bank_transfers (
     id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -142,10 +110,6 @@ CREATE TABLE bank_transfers (
         REFERENCES bank_accounts(id)
 ) ENGINE=InnoDB;
 
--- ==========================================
--- INITIAL DATA
--- ==========================================
-
 INSERT INTO bank_transaction_types (name)
 VALUES
 ('Deposito'),
@@ -154,10 +118,6 @@ VALUES
 ('Consulta Saldo'),
 ('Reposicion Cajero'),
 ('Operacion Prueba');
-
--- ==========================================
--- SEED DATA (DATOS DE PRUEBA)
--- ==========================================
 
 -- 1. Registros en la tabla users (10 clientes y 5 empleados)
 INSERT INTO users (first_name, last_name, birth_date, identification_document, email, password)
@@ -180,7 +140,7 @@ VALUES
 ('Javier', 'Ramirez', '1991-05-16', '54321098', 'empleado4@banco.com', SHA2('admin123', 256)),
 ('Carmen', 'Castro', '1982-08-09', '43210987', 'empleado5@banco.com', SHA2('admin123', 256));
 
--- 2. Registros en bank_employees vinculados a los usuarios empleados (IDs 11 al 15)
+-- 2. Registros en bank_employees vinculados a los usuarios empleados (ids 11 al 15)
 INSERT INTO bank_employees (user_id)
 VALUES 
 (11), (12), (13), (14), (15);
