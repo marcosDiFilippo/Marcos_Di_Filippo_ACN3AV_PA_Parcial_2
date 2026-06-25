@@ -31,7 +31,6 @@ public class DashboardEmployee extends JFrame {
     private static final long serialVersionUID = 1L;
 
     private final Color primaryColor = Colors.PRIMARY_COLOR.getColor();
-    private final Color secondaryGray = Colors.SECONDARY_GRAY.getColor();
     private final Color backgroundColor = Colors.BACKGROUND_COLOR.getColor();
     private final Color actionAccent = Colors.ACTION_ACCENT.getColor();
     private final Color whiteColor = Colors.WHITE_COLOR.getColor();
